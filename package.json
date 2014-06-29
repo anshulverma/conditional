@@ -1,0 +1,41 @@
+{
+  "name": "node-preconditions",
+  "version": "0.0.1",
+  "description": "A preconditions package for node modules based on Google's Preconditions library",
+  "private": false,
+  "author": "Anshul Verma <anshul.verma86@gmail.com>",
+  "maintainers": [
+    "Anshul Verma <anshul.verma86@gmail.com>"
+  ],
+  "scripts": {
+    "test": "cake test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anshulverma/node-preconditions"
+  },
+  "dependencies": {
+    "coffee-script": "1.7.1",
+    "minimist": "0.1.0"
+  },
+  "devDependencies": {
+    "chai": "1.9.1",
+    "mocha": "1.20.1",
+    "docco": "0.6.3"
+  },
+  "bundledDependencies": [],
+  "keywords": [
+    "coffee-script",
+    "cake",
+    "preconditions"
+  ],
+  "engines": {
+    "node": ">= 0.10.0",
+    "npm": ">= 1.1.65"
+  },
+  "directories": {
+    "man": "./man",
+    "doc": "./doc",
+    "lib": "./lib"
+  }
+}
