@@ -2,4 +2,7 @@
 *.map
 
 # Node library modules
-node_modules
+node_modules/
+
+# Build artifacts
+lib/
