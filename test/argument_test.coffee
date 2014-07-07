@@ -1,7 +1,13 @@
+{checkArgument} = require '../src/main'
+
 describe 'Preconditions', ->
   describe '#arguments', ->
-    it '#simple', ->
+    it '#messageAndStack', ->
       try
-        preconditions.arg false, 'this must fail'
-      catch e then console.log e.stack
-      assert.fail 'precondition arg check should fail for false condition'
+        checkArgument false, 'this must fail'
+        assert.fail 'precondition arg check should fail for false condition'
+      catch e
+        assert.equal e.message, 'this must fail',
+          "error's message should be same as the one passed in the check call"
+        assert.notInclude e.stack, 'main.coffee',
+          'stack trace should not contain unwanted frames'
