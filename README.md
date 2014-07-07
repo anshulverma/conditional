@@ -5,13 +5,14 @@ node-preconditions
 **Table of Contents**
 
 - [node-preconditions](#node-preconditions)
+    - [Testing](#testing)
 
 <!-- markdown-toc end -->
 
 
 A preconditions package for node modules based on Google's Preconditions library
 
-# Testing
+## Testing
 
 To execute tests:
 
