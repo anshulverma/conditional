@@ -34,7 +34,6 @@
     "npm": ">= 1.1.65"
   },
   "directories": {
-    "man": "./man",
     "doc": "./doc",
     "lib": "./lib"
   }
