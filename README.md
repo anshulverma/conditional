@@ -9,6 +9,8 @@ node-preconditions
 
 - [node-preconditions](#node-preconditions)
     - [Testing](#testing)
+    - [Contributing](#contributing)
+    - [Author](#author)
 
 <!-- markdown-toc end -->
 
@@ -22,3 +24,15 @@ To execute tests:
 ``` bash
 $ cake test
 ```
+
+## Contributing
+
+Feel free to make a change and issue a pull request if you have a patch.
+
+If you have a feature request or if you find a bug, please open a issue.
+
+## Author
+
+[Anshul Verma](http://anshulverma.github.io/) ::
+[anshulverma](https://github.com/anshulverma) ::
+[@anshulverma](http://twitter.com/anshulverma)
