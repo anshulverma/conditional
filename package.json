@@ -15,8 +15,7 @@
     "url": "https://github.com/anshulverma/node-preconditions"
   },
   "dependencies": {
-    "coffee-script": "1.7.1",
-    "minimist": "0.1.0"
+    "coffee-script": "1.7.1"
   },
   "devDependencies": {
     "chai": "1.9.1",
