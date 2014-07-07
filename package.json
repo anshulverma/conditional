@@ -4,7 +4,7 @@
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
-  "main": "src/main.js",
+  "main": "lib/main.js",
   "maintainers": [
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
