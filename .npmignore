@@ -3,3 +3,12 @@ src/
 
 # Test source
 test/
+
+# Sourcemap
+*.map
+
+# Temporary files
+*~
+
+# Misc
+.travis.yml
