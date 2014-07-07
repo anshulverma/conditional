@@ -4,11 +4,13 @@
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
+  "main": "src/main.js",
   "maintainers": [
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
   "scripts": {
-    "test": "cake test"
+    "test": "cake test",
+    "prepublish": "cake build && cake docs"
   },
   "repository": {
     "type": "git",
@@ -33,7 +35,7 @@
     "npm": ">= 1.1.65"
   },
   "directories": {
-    "doc": "./doc",
+    "doc": "./docs",
     "lib": "./lib"
   }
 }
