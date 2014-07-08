@@ -3,8 +3,7 @@
 describe 'Preconditions', ->
   describe '#arguments', ->
     it '#message', ->
-      wrapper = ->
-        checkArgument false, 'force failure'
+      wrapper = -> checkArgument false, 'force failure'
       assert.throws wrapper, IllegalArgumentError, 'force failure'
 
     it '#stack', ->
@@ -18,6 +17,14 @@ describe 'Preconditions', ->
           'stack trace should not contain unwanted frames'
 
     it '#happyPath', ->
-      wrapper = ->
-        checkArgument true, 'valid argument'
+      wrapper = -> checkArgument true, 'valid argument'
+      assert.doesNotThrow wrapper
+
+    it '#undefined', ->
+      wrapper = -> checkArgument null, "'null' is not allowed"
+      assert.throws wrapper, IllegalArgumentError,
+        "'null' is not allowed"
+
+    it '#defined', ->
+      wrapper = -> checkArgument 'random', 'a non-undefined value is allowed'
       assert.doesNotThrow wrapper
