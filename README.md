@@ -50,7 +50,7 @@ function findMax(arr) {
   return Math.max.apply(Math, arr);
 }
 ```
-Now, whenever a user send in an empty array, a nice and meaningful message can be printed:
+Now, whenever a user sends in an empty array, a nice and meaningful message can be printed:
 
 ``` js
 findMax([]);  // throws "IllegalArgumentError: array must not be empty"
