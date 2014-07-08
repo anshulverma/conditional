@@ -18,3 +18,5 @@ prepareStackTrace = Error.prepareStackTrace
 Error.prepareStackTrace = (err, stack) ->
   stack.splice(0, 1) while do stack[0].getFileName is __filename
   prepareStackTrace err, stack
+
+module.exports.IllegalArgumentError = IllegalArgumentError
