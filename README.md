@@ -73,10 +73,10 @@ frames that point to methods of this module.
 
 Checks whether argument satisfies certain condition.
 
-> checkArgument(condition:boolean, [message:string])
+> checkArgument(condition:boolean|object, [message:string])
 
 This will throw `IllegalArgumentError` with message equal to the supplied string if `condition` is
-`false`. If `message` is not provided, a default value of `"invalid argument"` is assumed.
+`false` or `undefined`. If `message` is not provided, a default value of `"invalid argument"` is assumed.
 
 ``` js
 var preconditions = require('node-preconditions');
