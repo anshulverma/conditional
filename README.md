@@ -8,7 +8,13 @@ node-preconditions
 **Table of Contents**
 
 - [node-preconditions](#node-preconditions)
+    - [Summary](#summary)
+    - [Installation](#installation)
+    - [Usage](#usage)
+        - [Argument check](#argument-check)
+    - [Building](#building)
     - [Testing](#testing)
+    - [Documentation](#documentation)
     - [Contributing](#contributing)
     - [Author](#author)
 
@@ -76,11 +82,21 @@ This will throw `IllegalArgumentError` with message equal to the supplied string
 var preconditions = require('node-preconditions');
 
 function demo(arg) {
-  preconditions.checkArgument(arg === 'test', 'argument string must be equal to test');
+  preconditions.checkArgument(arg === 'test', "argument string must be equal to 'test'");
 
   continueWithNormalOperation();
 }
 ```
+
+## Building
+
+To get the js source generated form coffee script:
+
+``` bash
+$ cake build
+```
+
+This will put all js files in `lib` folder.
 
 ## Testing
 
@@ -89,6 +105,16 @@ To execute tests:
 ``` bash
 $ cake test
 ```
+
+## Documentation
+
+This module uses `docco` for document generation. To get the documentation:
+
+``` bash
+$ cake docs
+```
+
+All documentation files will be placed in `docs` folder.
 
 ## Contributing
 
