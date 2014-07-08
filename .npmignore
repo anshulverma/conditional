@@ -12,3 +12,6 @@ test/
 
 # Misc
 .travis.yml
+
+# Cake build file
+Cakefile
