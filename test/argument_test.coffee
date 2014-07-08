@@ -6,6 +6,10 @@ describe 'Preconditions', ->
       wrapper = -> checkArgument false, 'force failure'
       assert.throws wrapper, IllegalArgumentError, 'force failure'
 
+    it '#defaultMessage', ->
+      wrapper = -> checkArgument false
+      assert.throws wrapper, IllegalArgumentError, 'invalid argument'
+
     it '#stack', ->
       try
         checkArgument false, 'this must fail'
