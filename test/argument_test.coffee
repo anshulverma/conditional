@@ -9,16 +9,6 @@ describe 'test argument precondition', ->
     wrapper = -> checkArgument false
     assert.throws wrapper, IllegalArgumentError, 'invalid argument'
 
-  it 'error stack trace should not contain unwanted frames', ->
-    try
-      checkArgument false, 'this must fail'
-      assert.fail 'precondition arg check should fail for false condition'
-    catch e
-      assert.equal e.message, 'this must fail',
-        "error's message should be same as the one passed in the check call"
-      assert.notInclude e.stack, 'main.coffee',
-        'stack trace should not contain unwanted frames'
-
   it 'happy path test', ->
     wrapper = -> checkArgument true, 'valid argument'
     assert.doesNotThrow wrapper

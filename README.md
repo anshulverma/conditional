@@ -4,7 +4,7 @@ node-preconditions
 [![Build Status](https://travis-ci.org/anshulverma/node-preconditions.svg?branch=master)](https://travis-ci.org/anshulverma/node-preconditions)
 [![Dependency Status](https://gemnasium.com/anshulverma/node-preconditions.svg)](https://gemnasium.com/anshulverma/node-preconditions)
 
-<!-- markdown-toc start - Don't edit this section. Run M-x mardown-toc/generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
 - [node-preconditions](#node-preconditions)
@@ -12,6 +12,7 @@ node-preconditions
     - [Installation](#installation)
     - [Usage](#usage)
         - [Argument check](#argument-check)
+        - [Number type check](#number-type-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -73,18 +74,40 @@ frames that point to methods of this module.
 
 Checks whether argument satisfies certain condition.
 
-> checkArgument(condition:boolean|object, [message:string])
+> `checkArgument(condition:boolean|object, [message:string]) throws IllegalArgumentError`
 
 This will throw `IllegalArgumentError` with message equal to the supplied string if `condition` is
-`false` or `undefined`. If `message` is not provided, a default value of `"invalid argument"` is assumed.
+`false` or `undefined`. If `message` is not provided, a default value of `"invalid argument"` is
+assumed.
 
 ``` js
-var preconditions = require('node-preconditions');
+var checkArgument = require('node-preconditions').checkArgument;
 
 function demo(arg) {
-  preconditions.checkArgument(arg === 'test', "argument string must be equal to 'test'");
+  checkArgument(arg === 'test', "argument string must be equal to 'test'");
 
   continueWithNormalOperation();
+}
+```
+
+### Number type check
+
+Check for making sure that a variable contains numerical value.
+
+> `checkNumberType(value:*, [message:string]) throws InvalidTypeError`
+
+In some cases you want to make sure that only numerical value are sent to a method. For example, a
+method called `square(x)` which takes a numerical value x and returns its squared value. This method
+expects that the user will be sending a numerical value only. As we already know by now, it is
+always better to put our assumptions in code:
+
+``` js
+var checkNumberType = require('node-preconditions').checkNumberType;
+
+function square(x) {
+  checkNumberType(x, 'only numerical values can be squared');
+
+  return Math.pow(x, 2);
 }
 ```
 
