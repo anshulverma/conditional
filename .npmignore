@@ -15,3 +15,6 @@ test/
 
 # Cake build file
 Cakefile
+
+# Projectile
+.projectile

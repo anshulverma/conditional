@@ -9,3 +9,6 @@ lib/
 
 # Document files
 docs/
+
+# Log files
+*.log
