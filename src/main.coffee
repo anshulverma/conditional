@@ -1,8 +1,8 @@
-module.exports.checkArgument = (condition, message) ->
+checkArgument = (condition, message) ->
   message ?= 'invalid argument'
   throw new IllegalArgumentError(message) unless condition
 
-module.exports.checkNumberType = (value, message='invalid type') ->
+checkNumberType = (value, message='invalid type') ->
   throw new InvalidTypeError(message) unless isNumeric value
 
 isArray = Array.isArray
@@ -33,5 +33,10 @@ Error.prepareStackTrace = (err, stack) ->
   stack.splice(0, 1) while do stack[0].getFileName is __filename
   prepareStackTrace err, stack
 
+# export all preconditions
+module.exports.checkArgument = checkArgument
+module.exports.checkNumberType = checkNumberType
+
+# export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
 module.exports.InvalidTypeError = InvalidTypeError
