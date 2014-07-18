@@ -1,14 +1,6 @@
 {checkNumberType, InvalidTypeError} = require '../src/main'
 
 describe 'test number type precondition', ->
-  it 'error message can be controlled by checkNumberType', ->
-    wrapper = -> checkNumberType 'string', 'force type failure'
-    assert.throws wrapper, InvalidTypeError, 'force type failure'
-
-  it 'default error message', ->
-    wrapper = -> checkNumberType []
-    assert.throws wrapper, InvalidTypeError, 'invalid type'
-
   it 'happy path test', ->
     wrapper = -> checkNumberType 5, 'invalid numerical value'
     assert.doesNotThrow wrapper
