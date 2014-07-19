@@ -116,7 +116,7 @@ function square(x) {
 
 Check if a value is contained in another.
 
-> `checkContains(value:*, object:*, [message:string]) throws UnknownValueError
+> `checkContains(value:*, object:*, [message:string]) throws UnknownValueError`
 
 This is a very flexible check since it can allow contains check with numbers, strings, arrays or
 regular objects. Here are some of the rules it follows:
