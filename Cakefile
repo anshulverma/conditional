@@ -49,7 +49,7 @@ mocha = (callback) ->
   process.env['NODE_ENV'] = 'test'
   options = [
       '--compilers', 'coffee:coffee-script/register',
-      '--reporter', "spec",
+      '--reporter', 'spec',
       '--require', 'coffee-script',
       '--require', 'test/test_helper.coffee',
       '--colors',
@@ -60,7 +60,8 @@ mocha = (callback) ->
 docco = (callback) ->
   walk 'src', (err, files) -> launch 'docco', files, callback
 
-task 'docs', 'generate documentation', -> docco -> log 'documentation generation complete', green
+task 'docs', 'generate documentation', -> docco ->
+  log 'documentation generation complete', green
 
 task 'build', 'compile source', -> mocha -> build -> log 'build complete', green
 
