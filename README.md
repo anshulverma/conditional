@@ -5,7 +5,7 @@ node-preconditions
 [![Dependency Status](https://gemnasium.com/anshulverma/node-preconditions.svg)](https://gemnasium.com/anshulverma/node-preconditions)
 [![NPM version](https://badge.fury.io/js/node-preconditions.svg)](http://badge.fury.io/js/node-preconditions)
 
-[![NPM](https://nodei.co/npm/node-preconditions.png)](https://nodei.co/npm/node-preconditions/)
+[![NPM](https://nodei.co/npm/node-preconditions.png?stars=true&downloads=true)](https://nodei.co/npm/node-preconditions/)
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
