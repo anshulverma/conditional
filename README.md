@@ -3,6 +3,7 @@ node-preconditions
 
 [![Build Status](https://travis-ci.org/anshulverma/node-preconditions.svg?branch=master)](https://travis-ci.org/anshulverma/node-preconditions)
 [![Dependency Status](https://gemnasium.com/anshulverma/node-preconditions.svg)](https://gemnasium.com/anshulverma/node-preconditions)
+[![NPM version](https://badge.fury.io/js/node-preconditions.svg)](http://badge.fury.io/js/node-preconditions)
 
 [![NPM](https://nodei.co/npm/node-preconditions.png)](https://nodei.co/npm/node-preconditions/)
 
