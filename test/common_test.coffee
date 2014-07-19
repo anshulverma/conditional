@@ -1,8 +1,10 @@
 {
   checkArgument
   checkNumberType
+  checkContains
   IllegalArgumentError
   InvalidTypeError
+  UnknownValueError
 } = require '../src/main'
 
 FORCED_ERROR = 'this must fail'
@@ -19,6 +21,12 @@ executors = [
     execute: (errorMessage) -> checkNumberType 'string', errorMessage
     errorType: InvalidTypeError
     defaultErrorMessage: 'invalid type'
+  }
+  {
+    name: 'contains check'
+    execute: (errorMessage) -> checkContains 'd', ['a', 'b', 'c'], errorMessage
+    errorType: UnknownValueError
+    defaultErrorMessage: "unknown value 'd'"
   }
 ]
 

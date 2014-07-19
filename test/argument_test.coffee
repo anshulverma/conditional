@@ -13,3 +13,11 @@ describe 'test argument precondition', ->
   it 'a non-undefined value for condition is valid', ->
     wrapper = -> checkArgument 'random', 'a non-undefined value is allowed'
     assert.doesNotThrow wrapper
+
+  it 'a empty string value for condition is valid', ->
+    wrapper = -> checkArgument '', 'a string value is allowed'
+    assert.doesNotThrow wrapper
+
+  it 'a numerical value 0 is valid', ->
+    wrapper = -> checkArgument 0, '0 (zero) value is allowed'
+    assert.doesNotThrow wrapper

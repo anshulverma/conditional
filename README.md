@@ -13,6 +13,7 @@ node-preconditions
     - [Usage](#usage)
         - [Argument check](#argument-check)
         - [Number type check](#number-type-check)
+        - [Contains check](#contains-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -108,6 +109,33 @@ function square(x) {
   checkNumberType(x, 'only numerical values can be squared');
 
   return Math.pow(x, 2);
+}
+```
+
+### Contains check
+
+Check if a value is contained in another.
+
+> `checkContains(value:*, object:*, [message:string]) throws UnknownValueError
+
+This is a very flexible check since it can allow contains check with numbers, strings, arrays or
+regular objects. Here are some of the rules it follows:
+
+- empty strings are equal
+- `null` is not same as 0 (zero) or empty string
+- 'number' can contain 'string' and vice versa (except for array objects as explained below)
+- array objects (second parameter) enforce strict types (for example numbers and string are
+considered different in this case).
+
+``` js
+var checkContains = require('node-preconditions').checkContains;
+
+function instalPackage(userInput) {
+  checkContains(userInput, ['yes', 'y', 'no', 'n'], 'invalid user input (must be y/n)');
+
+  if (userInput.indexOf('y') === 0) {
+    // do install package
+  }
 }
 ```
 
