@@ -95,6 +95,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-docco'
   grunt.loadNpmTasks 'grunt-mocha-istanbul'
+  grunt.loadNpmTasks 'grunt-mocha-cov'
 
   grunt.registerTask 'docs', ['docco']
   grunt.registerTask 'coveralls', ['mocha_istanbul:coveralls']
