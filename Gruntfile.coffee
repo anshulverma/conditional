@@ -51,7 +51,7 @@ module.exports = (grunt) ->
       }
       test: {
         options: {
-          reporter: 'test'
+          reporter: 'spec'
         }
       }
       options: {
