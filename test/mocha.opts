@@ -2,3 +2,4 @@
 --require coffee-script
 --reporter min
 --ui bdd
+--colors
