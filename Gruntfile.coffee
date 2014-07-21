@@ -44,8 +44,17 @@ module.exports = (grunt) ->
       }
     }
     mochacov: {
+      coverage: {
+        options: {
+          coveralls: true
+        }
+      }
+      test: {
+        options: {
+          reporter: 'test'
+        }
+      }
       options: {
-        coveralls: true
         files: 'test/*.coffee'
       }
     }
