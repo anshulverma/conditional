@@ -3,6 +3,7 @@ node-preconditions
 
 [![Build Status](https://travis-ci.org/anshulverma/node-preconditions.svg?branch=master)](https://travis-ci.org/anshulverma/node-preconditions)
 [![Dependency Status](https://gemnasium.com/anshulverma/node-preconditions.svg)](https://gemnasium.com/anshulverma/node-preconditions)
+[![Coverage Status](https://img.shields.io/coveralls/anshulverma/node-preconditions.svg)](https://coveralls.io/r/anshulverma/node-preconditions?branch=master)
 [![NPM version](https://badge.fury.io/js/node-preconditions.svg)](http://badge.fury.io/js/node-preconditions)
 
 [![NPM](https://nodei.co/npm/node-preconditions.png?stars=true&downloads=true)](https://nodei.co/npm/node-preconditions/)
@@ -19,7 +20,6 @@ node-preconditions
         - [Contains check](#contains-check)
     - [Building](#building)
     - [Testing](#testing)
-    - [Documentation](#documentation)
     - [Contributing](#contributing)
     - [Author](#author)
 
@@ -154,21 +154,11 @@ This will put all js files in `lib` folder.
 
 ## Testing
 
-To execute tests:
+To execute tests, make sure [grunt](https://github.com/gruntjs/grunt-cli) is installed. Then run:
 
 ``` bash
-$ cake test
+$ grunt
 ```
-
-## Documentation
-
-This module uses `docco` for document generation. To get the documentation:
-
-``` bash
-$ cake docs
-```
-
-All documentation files will be placed in `docs` folder.
 
 ## Contributing
 
