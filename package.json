@@ -9,7 +9,7 @@
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
   "scripts": {
-    "test": "grunt travis",
+    "test": "grunt",
     "prepublish": "cake build && cake docs"
   },
   "config": {

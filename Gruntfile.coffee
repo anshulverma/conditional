@@ -49,11 +49,6 @@ module.exports = (grunt) ->
           coveralls: true
         }
       }
-      test: {
-        options: {
-          reporter: 'spec'
-        }
-      }
       options: {
         files: 'test/*.coffee'
       }
