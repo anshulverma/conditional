@@ -4,7 +4,7 @@
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
-  "main": "lib/main.js",
+  "main": "src/main.js",
   "maintainers": [
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
@@ -35,14 +35,16 @@
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-docco": "^0.3.3",
     "grunt-mocha-cov": "^0.2.1",
+    "grunt-mocha-istanbul": "^1.5.0",
     "grunt-mocha-test": "^0.11.0",
     "mocha": "1.20.1"
   },
   "bundledDependencies": [],
   "keywords": [
     "coffee-script",
-    "cake",
-    "preconditions"
+    "grunt",
+    "preconditions",
+    "coverage"
   ],
   "engines": {
     "node": ">= 0.10.0",
@@ -50,6 +52,6 @@
   },
   "directories": {
     "doc": "./docs",
-    "lib": "./lib"
+    "lib": "./src"
   }
 }

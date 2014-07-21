@@ -1,5 +1,5 @@
 # Coffee source files
-src/
+src/*.coffee
 
 # Test source
 test/
@@ -13,8 +13,8 @@ test/
 # Misc
 .travis.yml
 
-# Cake build file
-Cakefile
+# Grunt build file
+Gruntfile.coffee
 
 # Projectile
 .projectile

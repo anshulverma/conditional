@@ -6,7 +6,8 @@ module.exports = (grunt) ->
           bare: true
         }
         files: {
-          'lib/main.js': 'src/main.coffee'
+          'src/main.js': 'src/main.coffee'
+          'test/js/argument_test.js': 'test/argument_test.coffee'
         }
       }
     }
@@ -71,16 +72,35 @@ module.exports = (grunt) ->
         files: 'test/*.coffee'
       }
     }
+    mocha_istanbul: {
+      coveralls: {
+        src: 'test'
+        options: {
+          coverage: true
+          check: {
+            lines: 90
+            statements: 90
+            funtions: 90
+          }
+          root: './src'
+          reportFormats: ['lcovonly', 'html']
+        }
+      }
+    }
   }
 
   grunt.loadNpmTasks 'grunt-mocha-test'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-blanket'
-  grunt.loadNpmTasks 'grunt-mocha-cov'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-docco'
+  grunt.loadNpmTasks 'grunt-mocha-istanbul'
 
   grunt.registerTask 'docs', ['docco']
-  grunt.registerTask 'default', ['mochaTest', 'coffeelint', 'coffee', 'docs']
+  grunt.registerTask 'coveralls', ['mocha_istanbul:coveralls']
+  grunt.registerTask 'test', ['coffeelint', 'coffee', 'coveralls']
+  grunt.registerTask 'default', ['test', 'docs']
   grunt.registerTask 'travis', ['default', 'mochacov']
-  grunt.registerTask 'test', ['mochaTest', 'coffeelint']
+
+  grunt.event.on 'coverage', (lcov, done) ->
+    do done
