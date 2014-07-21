@@ -147,7 +147,7 @@ function instalPackage(userInput) {
 To get the js source generated form coffee script:
 
 ``` bash
-$ cake build
+$ grunt coffee
 ```
 
 This will put all js files in `lib` folder.

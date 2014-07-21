@@ -1,5 +1,15 @@
 module.exports = (grunt) ->
   grunt.initConfig {
+    coffee: {
+      compile: {
+        options: {
+          bare: true
+        }
+        files: {
+          'lib/main.js': 'src/main.coffee'
+        }
+      }
+    }
     mochaTest: {
       test: {
         options: {
@@ -59,6 +69,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-blanket'
   grunt.loadNpmTasks 'grunt-mocha-cov'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
 
   grunt.registerTask 'default', ['mochaTest', 'coffeelint']
   grunt.registerTask 'travis', ['default', 'mochacov']
