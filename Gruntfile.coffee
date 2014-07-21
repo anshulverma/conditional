@@ -53,6 +53,14 @@ module.exports = (grunt) ->
         'coverage/': [ 'src/' ]
       }
     }
+    docco: {
+      debug: {
+        src: [ 'src/*.coffee', 'test/*.coffee']
+        options: {
+          output: 'docs/'
+        }
+      }
+    }
     mochacov: {
       coverage: {
         options: {
@@ -70,6 +78,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-blanket'
   grunt.loadNpmTasks 'grunt-mocha-cov'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-docco'
 
-  grunt.registerTask 'default', ['mochaTest', 'coffeelint', 'coffee']
+  grunt.registerTask 'default', ['mochaTest', 'coffeelint', 'coffee', 'docco']
   grunt.registerTask 'travis', ['default', 'mochacov']
