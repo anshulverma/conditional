@@ -12,3 +12,9 @@ docs/
 
 # Log files
 *.log
+
+# All javascript source (this is a coffee script project)
+*.js
+
+# Code coverage output
+coverage/
