@@ -80,5 +80,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-docco'
 
-  grunt.registerTask 'default', ['mochaTest', 'coffeelint', 'coffee', 'docco']
+  grunt.registerTask 'docs', ['docco']
+  grunt.registerTask 'default', ['mochaTest', 'coffeelint', 'coffee', 'docs']
   grunt.registerTask 'travis', ['default', 'mochacov']
+  grunt.registerTask 'test', ['mochaTest', 'coffeelint']

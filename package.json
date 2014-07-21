@@ -9,7 +9,7 @@
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
   "scripts": {
-    "test": "grunt",
+    "test": "grunt test",
     "prepublish": "grunt"
   },
   "config": {

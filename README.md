@@ -20,6 +20,7 @@ node-preconditions
         - [Contains check](#contains-check)
     - [Building](#building)
     - [Testing](#testing)
+    - [Documentation](#documentation)
     - [Contributing](#contributing)
     - [Author](#author)
 
@@ -157,7 +158,16 @@ This will put all js files in `lib` folder.
 To execute tests, make sure [grunt](https://github.com/gruntjs/grunt-cli) is installed. Then run:
 
 ``` bash
-$ grunt
+$ grunt test
+```
+
+## Documentation
+
+Documentation is generated using [docco](https://github.com/jashkenas/docco) and placed in `docs`
+folder. To build documentation:
+
+``` bash
+$ grunt docs
 ```
 
 ## Contributing
