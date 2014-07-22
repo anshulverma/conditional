@@ -62,16 +62,6 @@ module.exports = (grunt) ->
         }
       }
     }
-    mochacov: {
-      coverage: {
-        options: {
-          coveralls: true
-        }
-      }
-      options: {
-        files: 'test/*.coffee'
-      }
-    }
     mocha_istanbul: {
       coveralls: {
         src: 'test'
@@ -95,13 +85,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-docco'
   grunt.loadNpmTasks 'grunt-mocha-istanbul'
-  grunt.loadNpmTasks 'grunt-mocha-cov'
 
   grunt.registerTask 'docs', ['docco']
   grunt.registerTask 'coveralls', ['mocha_istanbul:coveralls']
   grunt.registerTask 'test', ['coffeelint', 'coffee', 'coveralls']
   grunt.registerTask 'default', ['test', 'docs']
-  grunt.registerTask 'travis', ['default', 'mochacov']
+  grunt.registerTask 'travis', ['default', 'coveralls']
 
   grunt.event.on 'coverage', (lcov, done) ->
-    do done
+    require('coveralls').handleInput lcov, (err) ->
+      if (err?)
+        return done(err)
+      do done
