@@ -179,7 +179,7 @@ $ grunt docs
 The `default` task of `grunt` will check linting, test everything, generate docs and build
 javascript source. So, to execute:
 
-``` js
+``` bash
 $ grunt
 ```
 
