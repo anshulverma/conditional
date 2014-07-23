@@ -52,6 +52,6 @@
   },
   "directories": {
     "doc": "./docs",
-    "lib": "./src"
+    "src": "./src"
   }
 }
