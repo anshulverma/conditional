@@ -32,7 +32,7 @@ describe 'test contains precondition', ->
     obj2 = { 'test' }
     obj3 = null
     wrapper = ->
-      # checkContains obj1, [obj1, obj2, obj3]
+      checkContains obj1, [obj1, obj2, obj3]
       checkContains obj2, [obj1, obj2, obj3]
       checkContains obj3, [obj1, obj2, obj3]
     assert.doesNotThrow wrapper
