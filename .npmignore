@@ -18,3 +18,12 @@ Gruntfile.coffee
 
 # Projectile
 .projectile
+
+# Coverage files
+coverage/
+
+# Coffee lint file
+coffeelint.json
+
+# Test file's documentation
+docs/*test*.html
