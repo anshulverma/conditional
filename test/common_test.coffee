@@ -11,19 +11,19 @@ FORCED_ERROR = 'this must fail'
 
 executors = [
   {
-    name: 'argument check'
+    name: 'argument'
     execute: (errorMessage) -> checkArgument false, errorMessage
     errorType: IllegalArgumentError
     defaultErrorMessage: 'invalid argument'
   }
   {
-    name: 'type check'
+    name: 'type'
     execute: (errorMessage) -> checkNumberType 'string', errorMessage
     errorType: InvalidTypeError
     defaultErrorMessage: 'invalid type'
   }
   {
-    name: 'contains check'
+    name: 'contains'
     execute: (errorMessage) -> checkContains 'd', ['a', 'b', 'c'], errorMessage
     errorType: UnknownValueError
     defaultErrorMessage: "unknown value 'd'"
@@ -37,10 +37,10 @@ runTests = (test) ->
 describe 'common tests for preconditions', ->
   describe 'error trace should not contain unwanted frames', ->
     runTests (executor) ->
-      it "#{executor.name}", ->
+      it "#{executor.name} check", ->
         try
           executor.execute FORCED_ERROR
-          assert.fail "precondition #{executor.name} should fail"
+          assert.fail "precondition #{executor.name} check should fail"
         catch e
           assert.equal e.message, FORCED_ERROR,
             "error message should be '#{FORCED_ERROR}'"
@@ -49,13 +49,13 @@ describe 'common tests for preconditions', ->
 
   describe 'error message can be controlled by precondition call', ->
     runTests (executor) ->
-      it "#{executor.name}", ->
+      it "#{executor.name} check", ->
         wrapper = -> executor.execute FORCED_ERROR
         assert.throws wrapper, executor.errorType, FORCED_ERROR
 
   describe 'preconditions return a default error message if none present', ->
     runTests (executor) ->
-      it "#{executor.name}", ->
+      it "#{executor.name} check", ->
         assert.throws executor.execute,
                       executor.errorType,
                       executor.defaultErrorMessage
