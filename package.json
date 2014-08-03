@@ -4,20 +4,13 @@
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
-  "main": "src/main.js",
+  "main": "lib/main.js",
   "maintainers": [
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
   "scripts": {
     "test": "grunt test",
-    "prepublish": "grunt"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "src",
-      "loader": "./node-loaders/coffee-script",
-      "data-cover-never": "node_modules"
-    }
+    "prepublish": "grunt build"
   },
   "repository": {
     "type": "git",
@@ -25,19 +18,22 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "blanket": "^1.1.6",
     "chai": "1.9.1",
     "coffee-script": "^1.7.1",
     "coveralls": "^2.11.1",
     "docco": "0.6.3",
     "grunt": "^0.4.5",
-    "grunt-blanket": "0.0.8",
+    "grunt-coffee-coverage": "^0.1.5",
     "grunt-coffeelint": "0.0.10",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.10.1",
+    "grunt-coveralls": "^0.3.0",
     "grunt-docco": "^0.3.3",
-    "grunt-mocha-istanbul": "^1.5.0",
+    "grunt-env": "^0.4.1",
     "grunt-mocha-test": "^0.11.0",
-    "mocha": "1.20.1"
+    "grunt-sed": "^0.1.1",
+    "mocha": "1.20.1",
+    "mocha-lcov-reporter": "0.0.1"
   },
   "bundledDependencies": [],
   "keywords": [
@@ -52,6 +48,6 @@
   },
   "directories": {
     "doc": "./docs",
-    "src": "./src"
+    "lib": "./lib"
   }
 }
