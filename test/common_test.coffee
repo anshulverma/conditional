@@ -2,6 +2,7 @@
   checkArgument
   checkNumberType
   checkContains
+  checkEquals
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
@@ -27,6 +28,12 @@ executors = [
     execute: (errorMessage) -> checkContains 'd', ['a', 'b', 'c'], errorMessage
     errorType: UnknownValueError
     defaultErrorMessage: "unknown value 'd'"
+  }
+  {
+    name: 'equals'
+    execute: (errorMessage) -> checkEquals 'a', 'b', errorMessage
+    errorType: UnknownValueError
+    defaultErrorMessage: "expected 'b' but got 'a'"
   }
 ]
 
