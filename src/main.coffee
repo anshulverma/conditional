@@ -30,13 +30,10 @@ checkContains = (value, object, message="unknown value '#{value}'") ->
          (not (isEmptyString(object) or value in object))
         do invokeError
     when isArray object then do invokeError unless value in object
-    when isNumeric object
-      do invokeError unless ~object.toString().indexOf value
+    when isNumeric object then do invokeError unless ~object.toString().indexOf value
     else do invokeError unless value of object
 
-checkEquals = (actual,
-               expected,
-               message="expected '#{expected}' but got '#{actual}'") ->
+checkEquals = (actual, expected, message="expected '#{expected}' but got '#{actual}'") ->
   checkArgument isNotUndefined(expected), 'invalid value expected'
 
   invokeError = ->
@@ -47,8 +44,7 @@ checkEquals = (actual,
       do invokeError if isNotArray(actual) or actual.length isnt expected.length
       for i in [0...expected.length]
         do invokeError unless (actual[i] is expected[i] and isNotUndefined actual[i])
-    when isObject expected
-      actual[key] is value or do invokeError for key, value of expected
+    when isObject expected then actual[key] is value or do invokeError for key, value of expected
     when actual isnt expected then do invokeError
 
 AbstractError = (@message) ->
