@@ -179,7 +179,7 @@ To get the js source generated form coffee script:
 $ grunt coffee
 ```
 
-This will put all js files in `src` folder alongside the coffee source.
+This will put all js files in `lib` folder.
 
 ## Testing
 
@@ -192,6 +192,9 @@ $ grunt test
 Before testing, this task will perform a lint check using [coffeelint](http://www.coffeelint.org/).
 Tests will be executed if and only if linting succeeds.
 
+The `default` task of `grunt` will run this command as well. So, just typing `grunt` and pressing
+RET is also sufficient to run tests.
+
 ## Documentation
 
 Documentation is generated using [docco](https://github.com/jashkenas/docco) and placed in `docs`
@@ -203,11 +206,11 @@ $ grunt docs
 
 ## Build + Test + Document
 
-The `default` task of `grunt` will check linting, test everything, generate docs and build
-javascript source. So, to execute:
+The `build` task of `grunt` will check linting, test everything, generate docs and build javascript
+source. So, to execute:
 
 ``` bash
-$ grunt
+$ grunt build
 ```
 
 ## Contributing
