@@ -18,6 +18,13 @@ module.exports = (grunt) ->
         files:
           'lib/main.js': 'src/main.coffee'
     mochaTest:
+      options:
+        require:
+          [
+            'coffee-script/register',
+            'coffee-script',
+            'test/test_helper.coffee'
+          ]
       test:
         options:
           reporter: 'spec'
