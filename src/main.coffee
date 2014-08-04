@@ -1,4 +1,3 @@
-{trimStackTrace} = require './error_handler'
 {
   isObject
   isArray, isNotArray
@@ -66,6 +65,7 @@ class InvalidTypeError extends AbstractError
 class UnknownValueError extends AbstractError
 
 # hide this file from the stack trace
+{trimStackTrace} = require './error_handler'
 trimStackTrace __filename
 
 # export all preconditions
