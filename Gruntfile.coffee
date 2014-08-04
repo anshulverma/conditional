@@ -105,6 +105,13 @@ module.exports = (grunt) ->
       '_coverage'
     ]
   grunt.registerTask 'docs',    ['clean:docs', 'docco']
-  grunt.registerTask 'test',    ['coffeelint', 'mochaTest:test']
+  grunt.registerTask 'test',    ['mochaTest:test']
   grunt.registerTask 'default', ['test']
-  grunt.registerTask 'build',   ['clean', 'test', 'coffee:compile', 'docs']
+  grunt.registerTask 'build',
+    [
+      'clean',
+      'coffeelint',
+      'test',
+      'coffee:compile',
+      'docs'
+    ]
