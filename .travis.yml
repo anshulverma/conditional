@@ -3,4 +3,4 @@ node_js:
   - "0.10"
   - "0.11"
 before_install: npm install -g grunt-cli
-script: grunt travis
+script: grunt build && grunt coverage --type ci
