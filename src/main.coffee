@@ -1,3 +1,5 @@
+{trimStackTrace} = require './error_handler'
+
 checkArgument = (condition, message) ->
   message ?= 'invalid argument'
   throw new IllegalArgumentError(message) unless isString(condition) or
@@ -56,11 +58,8 @@ class InvalidTypeError extends AbstractError
 
 class UnknownValueError extends AbstractError
 
-# remove unwanted frames from stack trace
-prepareStackTrace = Error.prepareStackTrace
-Error.prepareStackTrace = (err, stack) ->
-  stack.splice(0, 1) while do stack[0].getFileName is __filename
-  prepareStackTrace err, stack
+# hide this file from the stack trace
+trimStackTrace __filename
 
 # export all preconditions
 module.exports.checkArgument = checkArgument

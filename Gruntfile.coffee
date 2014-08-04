@@ -17,6 +17,7 @@ module.exports = (grunt) ->
           bare: true
         files:
           'lib/main.js': 'src/main.coffee'
+          'lib/error_handler.js': 'src/error_handler.coffee'
     mochaTest:
       options:
         require:

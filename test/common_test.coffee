@@ -6,7 +6,7 @@
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
-} = require '../src/main'
+} = preconditions
 
 FORCED_ERROR = 'this must fail'
 
@@ -51,7 +51,7 @@ describe 'common tests for preconditions', ->
         catch e
           assert.equal e.message, FORCED_ERROR,
             "error message should be '#{FORCED_ERROR}'"
-          assert.notInclude e.stack, 'main.coffee',
+          assert.notMatch e.stack, /main\.(coffee|js)/,
             'stack trace should not contain unwanted frames'
 
   describe 'error message can be controlled by precondition call', ->
