@@ -27,6 +27,11 @@ checkContains = (value, object, message="unknown value '#{value}'") ->
       do invokeError unless ~object.toString().indexOf value
     else do invokeError unless value of object
 
+checkEquals = (actual,
+               expected,
+               message="expected '#{expected}' but got '#{actual}'") ->
+  throw new UnknownValueError(message) unless actual is expected
+
 isArray = Array.isArray
 
 # refer to this snippet from jQuery for explanation:
@@ -65,6 +70,7 @@ trimStackTrace __filename
 module.exports.checkArgument = checkArgument
 module.exports.checkNumberType = checkNumberType
 module.exports.checkContains = checkContains
+module.exports.checkEquals = checkEquals
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
