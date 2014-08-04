@@ -18,6 +18,7 @@ node-preconditions
         - [Argument check](#argument-check)
         - [Number type check](#number-type-check)
         - [Contains check](#contains-check)
+        - [Equals check](#equals-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -141,6 +142,32 @@ function installPackage(userInput) {
   if (userInput.indexOf('y') === 0) {
     // do install package
   }
+}
+```
+
+### Equals check
+
+Check if two values are equal.
+
+> `checkContains(actual:*, expected:*, [message:string]) throws UnknownValueError`
+
+Similar to contains check, this check also allows you to check against any data type. It follows
+these rules:
+
+- empty strings are equal
+- `null` values are equal
+- `string` and `number` types are not equal in any condition
+- `undefined` values can not be checked against (will throw a `IllegalArgumentError`)
+- order of key/value pair in a `map` is not relevant. This means `{val1 : 1, val2: 2}` is same as
+`{val2: 2, val1: 1}`
+
+``` js
+var checkEquals = require('node-preconditions').checkEquals;
+
+function login(password) {
+  checkEquals(password, 'expected-password', 'invalid password');
+
+  // password successfully validated
 }
 ```
 
