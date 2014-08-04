@@ -1,4 +1,4 @@
-{checkNumberType, InvalidTypeError} = require '../src/main'
+{checkNumberType, InvalidTypeError} = preconditions
 
 describe 'test number type precondition', ->
   it 'happy path test', ->

@@ -1,4 +1,4 @@
-{checkArgument, IllegalArgumentError} = require '../src/main'
+{checkArgument, IllegalArgumentError} = preconditions
 
 describe 'test argument precondition', ->
   it 'happy path test', ->

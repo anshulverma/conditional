@@ -1,4 +1,4 @@
-{checkContains, UnknownValueError, IllegalArgumentError} = require '../src/main'
+{checkContains, UnknownValueError, IllegalArgumentError} = preconditions
 
 describe 'test contains precondition', ->
   it 'happy path test', ->

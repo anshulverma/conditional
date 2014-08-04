@@ -1,4 +1,4 @@
-{checkEquals, UnknownValueError} = require '../src/main'
+{checkEquals, UnknownValueError} = preconditions
 
 describe 'test equality precondition', ->
   it 'string equality test', ->
