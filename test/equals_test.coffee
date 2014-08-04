@@ -70,3 +70,7 @@ describe 'test equality precondition', ->
     assert.throws wrapper, UnknownValueError, 'expecting false'
     wrapper = -> checkEquals UNDEFINED, false, 'expecting false'
     assert.throws wrapper, UnknownValueError, 'expecting false'
+
+  it 'numbers and string are not equal', ->
+    wrapper = -> checkEquals '123', 123, 'expecting number'
+    assert.throws wrapper, UnknownValueError, 'expecting number'
