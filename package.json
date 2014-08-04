@@ -1,6 +1,6 @@
 {
   "name": "node-preconditions",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
