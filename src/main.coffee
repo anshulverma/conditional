@@ -1,4 +1,12 @@
 {trimStackTrace} = require './error_handler'
+{
+  isObject
+  isArray, isNotArray
+  isNumeric
+  isString
+  isEmptyString
+  isNotUndefined
+} = require './util'
 
 checkArgument = (condition, message) ->
   message ?= 'invalid argument'
@@ -30,25 +38,19 @@ checkContains = (value, object, message="unknown value '#{value}'") ->
 checkEquals = (actual,
                expected,
                message="expected '#{expected}' but got '#{actual}'") ->
-  throw new UnknownValueError(message) unless actual is expected
+  checkArgument isNotUndefined(expected), 'invalid value expected'
 
-isArray = Array.isArray
+  invokeError = ->
+    throw new UnknownValueError(message)
 
-# refer to this snippet from jQuery for explanation:
-# https://github.com/jquery/jquery/blob/bbdfb/src/core.js#L212
-isNumeric = (value) ->
-  !isArray(value) && (value - parseFloat(value) + 1) >= 0
-
-toString = Object.prototype.toString
-
-# refer to underscore.js for explanation
-# http://underscorejs.org/docs/underscore.html#section-107
-isString = (value) ->
-  toString.call(value) is '[object String]'
-
-isEmptyString = (value) ->
-  checkArgument isString(value), 'value must be a string'
-  not value
+  switch
+    when isArray expected
+      do invokeError if isNotArray(actual) or actual.length isnt expected.length
+      for i in [0...expected.length]
+        do invokeError unless (actual[i] is expected[i] and isNotUndefined actual[i])
+    when isObject expected
+      actual[key] is value or do invokeError for key, value of expected
+    when actual isnt expected then do invokeError
 
 AbstractError = (@message) ->
   Error.call(@)
