@@ -35,17 +35,19 @@ checkContains = (value, object, message="unknown value '#{value}'") ->
 
 checkEquals = (actual, expected, message="expected '#{expected}' but got '#{actual}'") ->
   checkArgument isNotUndefined(expected), 'invalid value expected'
+  throw new UnknownValueError(message) unless isEqual actual, expected
 
-  invokeError = ->
-    throw new UnknownValueError(message)
-
+isEqual = (actual, expected) ->
   switch
     when isArray expected
-      do invokeError if isNotArray(actual) or actual.length isnt expected.length
+      return false if isNotArray(actual) or actual.length isnt expected.length
       for i in [0...expected.length]
-        do invokeError unless (actual[i] is expected[i] and isNotUndefined actual[i])
-    when isObject expected then actual[key] is value or do invokeError for key, value of expected
-    when actual isnt expected then do invokeError
+        return false unless isEqual(actual[i], expected[i]) and isNotUndefined actual[i]
+    when isObject expected
+      for key, value of expected
+        return false unless actual[key] is value
+    when actual isnt expected then return false
+  true
 
 AbstractError = (@message) ->
   Error.call(@)
