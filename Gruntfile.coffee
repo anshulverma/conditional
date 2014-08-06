@@ -13,12 +13,12 @@ module.exports = (grunt) ->
         NODE_ENV: 'coverage'
     coffee:
       compile:
-        options:
-          bare: true
-        files:
-          'lib/main.js': 'src/main.coffee'
-          'lib/error_handler.js': 'src/error_handler.coffee'
-          'lib/util.js': 'src/util.coffee'
+        expand: true
+        flatten: true
+        cwd: 'src'
+        src: ['*.coffee']
+        dest: 'lib'
+        ext: '.js'
     mochaTest:
       options:
         require:
