@@ -29,6 +29,15 @@ describe 'test equality precondition', ->
     wrapper = -> checkEquals {val1: 'a'}, {val2: 'a'}, 'expecting {val2: a}'
     assert.throws wrapper, UnknownValueError, 'expecting {val2: a}'
 
+  it 'nexted object equality test', ->
+    wrapper = -> checkEquals {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}},
+                             {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}}
+    assert.doesNotThrow wrapper
+    wrapper = -> checkEquals {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 1}},
+                             {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}},
+                             'expecting val2 to be 2'
+    assert.throws wrapper, UnknownValueError, 'expecting val2 to be 2'
+
   it 'undefined should not be expected', ->
     wrapper = -> checkEquals 'val', UNDEFINED
     assert.throws wrapper, IllegalArgumentError, 'invalid value expected'

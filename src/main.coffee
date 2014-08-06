@@ -45,7 +45,7 @@ isEqual = (actual, expected) ->
         return false unless isEqual(actual[i], expected[i]) and isNotUndefined actual[i]
     when isObject expected
       for key, value of expected
-        return false unless actual[key] is value
+        return false unless isEqual actual[key], value
     when actual isnt expected then return false
   true
 
