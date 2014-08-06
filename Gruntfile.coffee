@@ -15,9 +15,9 @@ module.exports = (grunt) ->
       compile:
         expand: true
         flatten: true
-        cwd: 'src'
+        cwd: '<%= path.src %>'
         src: ['*.coffee']
-        dest: 'lib'
+        dest: '<%= path.build %>'
         ext: '.js'
     mochaTest:
       options:
@@ -25,32 +25,32 @@ module.exports = (grunt) ->
           [
             'coffee-script/register',
             'coffee-script',
-            'test/test_helper.coffee'
+            '<%= path.test %>/test_helper.coffee'
           ]
       test:
         options:
           reporter: 'spec'
           colors: true
-        src: [ 'test/*.coffee' ]
+        src: [ '<%= path.test %>/*.coffee' ]
       coverageHTML:
         options:
           reporter: 'html-cov'
-          captureFile: 'coverage/index.html'
+          captureFile: '<%= path.coverage %>/index.html'
           quiet: true
-        src: [ 'test/*.coffee' ]
+        src: [ '<%= path.test %>/*.coffee' ]
       coverageLCOV:
         options:
           reporter: 'mocha-lcov-reporter'
-          captureFile: 'coverage/lcov.info'
+          captureFile: '<%= path.coverage %>/lcov.info'
           quiet: true
-        src: [ 'test/*.coffee' ]
+        src: [ '<%= path.test %>/*.coffee' ]
     coffeelint:
       src:
         files:
-          src: [ 'src/*.coffee' ]
+          src: [ '<%= path.src %>/*.coffee' ]
       test:
         files:
-          src: [ 'test/*.coffee' ]
+          src: [ '<%= path.test %>/*.coffee' ]
       buildTools:
         files:
           src: [ 'Gruntfile.coffee' ]
@@ -58,29 +58,34 @@ module.exports = (grunt) ->
         configFile: 'coffeelint.json'
     docco:
       all:
-        src: [ 'src/*.coffee', 'test/*.coffee']
+        src: [ '<%= path.src %>/*.coffee', '<%= path.test %>/*.coffee']
         options:
           output: 'docs/'
     coffeeCoverage:
       options:
-        initFile: 'coverage/src/init.js'
+        initFile: '<%= path.coverage %>/src/init.js'
         path: 'relative'
       all:
-        src: 'src'
-        dest: 'coverage/src'
+        src: '<%= path.src %>'
+        dest: '<%= path.coverage %>/src'
     coveralls:
       coverage:
-        src: 'coverage/lcov.info'
+        src: '<%= path.coverage %>/lcov.info'
         force: true
     sed:
       lcov:
-        path: 'coverage/lcov.info'
+        path: '<%= path.coverage %>/lcov.info'
         pattern: 'SF:'
-        replacement: 'SF:src/'
+        replacement: 'SF:<%= path.src %>/'
     clean:
-      coverage: 'coverage'
+      coverage: '<%= path.coverage %>'
       docs: 'docs'
-      lib: 'lib'
+      build: '<%= path.build %>'
+    path:
+      src: 'src'
+      test: 'test'
+      build: 'lib'
+      coverage: 'coverage'
 
   grunt.loadNpmTasks 'grunt-mocha-test'
   grunt.loadNpmTasks 'grunt-coffeelint'
