@@ -19,6 +19,12 @@ module.exports = (grunt) ->
         src: ['*.coffee']
         dest: '<%= path.build %>'
         ext: '.js'
+    watch:
+      coffee:
+        files: ['src/*.coffee']
+        tasks: 'build'
+        options:
+          spawn: false
     mochaTest:
       options:
         require:
@@ -96,6 +102,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-coveralls'
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-sed'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
 
   buildType = grunt.option('type') || 'local'
   checkContains buildType, ['local', 'ci'], "invalid build type '#{buildType}'"
