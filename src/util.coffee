@@ -1,7 +1,3 @@
-negate = (fn) ->
-  (value) ->
-    not fn value
-
 isObject = (value) ->
   value? and typeof value is 'object'
 
@@ -24,6 +20,10 @@ isEmptyString = (value) ->
 
 isUndefined = (value) ->
   typeof value is 'undefined'
+
+negate = (fn) ->
+  (value) ->
+    not fn value
 
 # export all utility methods
 module.exports.isObject         = isObject
