@@ -19,6 +19,7 @@ node-preconditions
         - [Number type check](#number-type-check)
         - [Contains check](#contains-check)
         - [Equals check](#equals-check)
+        - [Defined check](#defined-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -168,6 +169,28 @@ function login(password) {
   checkEquals(password, 'expected-password', 'invalid password');
 
   // password successfully validated
+}
+```
+
+### Defined check
+
+Check if a value is defined (or in other words, not undefined).
+
+> `checkDefined(value:*, [message:string]) throws UndefinedValueError`
+
+This check follows these rules:
+- an empty string is not undefined
+- 0 (zero) is not undefined
+- an empty array is not undefined
+- an empty object is not undefined
+
+``` js
+var checkDefined = require('node-preconditions').checkDefined;
+
+function sendMessage(message) {
+  checkDefined(message, 'a valid message required')
+
+  // proceed to send the message
 }
 ```
 
