@@ -8,16 +8,15 @@
   isUndefined
 } = require './util'
 
-checkArgument = (condition, message) ->
-  message ?= 'invalid argument'
+checkArgument = (condition, message = 'invalid argument') ->
   throw new IllegalArgumentError(message) unless isString(condition) or
                                                  isNumeric(condition) or
                                                  condition
 
-checkNumberType = (value, message='invalid type') ->
+checkNumberType = (value, message = 'invalid type') ->
   throw new InvalidTypeError(message) unless isNumeric value
 
-checkContains = (value, object, message="unknown value '#{value}'") ->
+checkContains = (value, object, message = "unknown value '#{value}'") ->
   checkArgument object?, 'invalid collection value'
 
   invokeError = ->
@@ -34,7 +33,7 @@ checkContains = (value, object, message="unknown value '#{value}'") ->
     when isNumeric object then do invokeError unless ~object.toString().indexOf value
     else do invokeError unless value of object
 
-checkEquals = (actual, expected, message="expected '#{expected}' but got '#{actual}'") ->
+checkEquals = (actual, expected, message = "expected '#{expected}' but got '#{actual}'") ->
   checkArgument isNotUndefined(expected), 'invalid value expected'
   throw new UnknownValueError(message) unless isEqual actual, expected
 
