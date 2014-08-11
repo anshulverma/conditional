@@ -3,9 +3,11 @@
   checkNumberType
   checkContains
   checkEquals
+  checkDefined
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
+  UndefinedValueError
 } = preconditions
 
 FORCED_ERROR = 'this must fail'
@@ -34,6 +36,12 @@ executors = [
     execute: (errorMessage) -> checkEquals 'a', 'b', errorMessage
     errorType: UnknownValueError
     defaultErrorMessage: "expected 'b' but got 'a'"
+  }
+  {
+    name: 'defined'
+    execute: (errorMessage) -> checkDefined {}.undefined, errorMessage
+    errorType: UnknownValueError
+    defaultErrorMessage: "undefined value"
   }
 ]
 
