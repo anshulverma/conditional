@@ -5,6 +5,7 @@
   isString
   isEmptyString
   isNotUndefined
+  isUndefined
 } = require './util'
 
 checkArgument = (condition, message) ->
@@ -37,6 +38,9 @@ checkEquals = (actual, expected, message="expected '#{expected}' but got '#{actu
   checkArgument isNotUndefined(expected), 'invalid value expected'
   throw new UnknownValueError(message) unless isEqual actual, expected
 
+checkDefined = (value, message = 'undefined value') ->
+  throw new UndefinedValueError message if isUndefined value
+
 isEqual = (actual, expected) ->
   switch
     when isArray expected
@@ -62,6 +66,8 @@ class InvalidTypeError extends AbstractError
 
 class UnknownValueError extends AbstractError
 
+class UndefinedValueError extends AbstractError
+
 # hide this file from the stack trace
 {trimStackTrace} = require './error_handler'
 trimStackTrace __filename
@@ -71,8 +77,10 @@ module.exports.checkArgument = checkArgument
 module.exports.checkNumberType = checkNumberType
 module.exports.checkContains = checkContains
 module.exports.checkEquals = checkEquals
+module.exports.checkDefined = checkDefined
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
 module.exports.InvalidTypeError = InvalidTypeError
-module.exports.UnknownValueError = UnknownValueError
+module.exports.InvalidTypeError = InvalidTypeError
+module.exports.UndefinedValueError = UndefinedValueError
