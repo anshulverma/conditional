@@ -75,11 +75,58 @@ $ npm install node-preconditions
 
 The usage of various checks differs slightly as explained.
 
-Each check accepts a callback function as the last parameter. If passed, and if the check fails, the
-callback will be invoked with the error.
-
 One important thing to note for all types of checks is that the error stack trace do not include
 frames that point to methods of this module.
+
+Each check accepts a callback function as the last parameter. If passed, and if the check fails, the
+callback will be invoked with the error. This means that message and callback parameters are
+optional for each precondition check. For example, `checkArgument` can be invoked in any of these
+ways:
+
+- no message or callback
+
+``` js
+checkArgument(typeof myVar === 'string')
+```
+
+If this check fails, a error will be thrown with the default message.
+
+- a custom message but no callback
+
+``` js
+`checkArgument(typeof myVar === 'string', 'expecting string value')`
+```
+
+Upon failure, the above check will throw a error with the message `'expecting string value'`.
+
+- a custom callback but no message
+
+``` js
+checkArgument(typeof myVar === 'string', function(err) {
+  if (err != null) {
+    console.error('Something went wrong: ' + err.message);
+  }
+});
+```
+
+As you can notice, if you call the precondition with a callback, you can make sure that the callback
+will be invoked if the check fails. Since, we didn't specify a custom message, a default on will be
+used.
+
+- a custom message and a custom callback
+
+``` js
+checkArgument(typeof myVar === 'string', 'expecting string value', function(err) {
+  if (err != null) {
+    console.error('I was expecting a string value');
+  }
+});
+```
+
+This works in a similar fashion as the one above except that the error's message will be the one we
+specified.
+
+With this in mind, lets look at all the available precondition checks below.
 
 ### Argument check
 

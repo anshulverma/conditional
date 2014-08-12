@@ -7,27 +7,28 @@
   isNotUndefined
   isUndefined
   isEqual
+  precondition
 } = require './util'
 
-DEFAULT_CALLBACK = (err) ->
-  throw err if err?
+DEFAULT_MESSAGES =
+  INVALID_ARGUMENT : 'invalid argument'
+  INVALID_TYPE     : 'invalid type'
+  UNKNOWN_VALUE    : 'unknown value'
+  UNDEFINED_VALUE  : 'undefined value'
 
-checkArgument = (condition, message = 'invalid argument', callback = DEFAULT_CALLBACK) ->
-  callback new IllegalArgumentError(message) unless isString(condition) or
-                                                    isNumeric(condition) or
-                                                    condition
+checkArgument = (condition, message) ->
+  throw new IllegalArgumentError(message) unless isString(condition) or
+                                                 isNumeric(condition) or
+                                                 condition
 
-checkNumberType = (value, message = 'invalid type', callback = DEFAULT_CALLBACK) ->
-  callback new InvalidTypeError(message) unless isNumeric value
+checkNumberType = (value, message) ->
+  throw new InvalidTypeError(message) unless isNumeric value
 
-checkContains = (value,
-                 object,
-                 message = "unknown value '#{value}'",
-                 callback = DEFAULT_CALLBACK) ->
+checkContains = (value, object, message) ->
   checkArgument object?, 'invalid collection value'
 
   invokeError = ->
-    callback new UnknownValueError(message)
+    throw new UnknownValueError(message)
 
   switch
     when isString object
@@ -42,13 +43,12 @@ checkContains = (value,
 
 checkEquals = (actual,
                expected,
-               message = "expected '#{expected}' but got '#{actual}'",
-               callback = DEFAULT_CALLBACK) ->
+               message = "expected '#{expected}' but got '#{actual}'") ->
   checkArgument isNotUndefined(expected), 'invalid value expected'
-  callback new UnknownValueError(message) unless isEqual actual, expected
+  throw new UnknownValueError(message) unless isEqual actual, expected
 
-checkDefined = (value, message = 'undefined value', callback = DEFAULT_CALLBACK) ->
-  callback new UndefinedValueError message if isUndefined value
+checkDefined = (value, message) ->
+  throw new UndefinedValueError message if isUndefined value
 
 AbstractError = (@message) ->
   Error.call(@)
@@ -70,15 +70,15 @@ class UndefinedValueError extends AbstractError
 trimStackTrace __filename
 
 # export all preconditions
-module.exports.checkArgument   = checkArgument
-module.exports.checkNumberType = checkNumberType
-module.exports.checkContains   = checkContains
-module.exports.checkEquals     = checkEquals
-module.exports.checkDefined    = checkDefined
+module.exports.checkArgument   = precondition checkArgument, DEFAULT_MESSAGES.INVALID_ARGUMENT, 1
+module.exports.checkNumberType = precondition checkNumberType, DEFAULT_MESSAGES.INVALID_TYPE, 1
+module.exports.checkContains   = precondition checkContains, null, 2
+module.exports.checkEquals     = precondition checkEquals, null, 2
+module.exports.checkDefined    = precondition checkDefined, DEFAULT_MESSAGES.UNDEFINED_VALUE, 1
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
 module.exports.InvalidTypeError     = InvalidTypeError
 module.exports.InvalidTypeError     = InvalidTypeError
-module.exports.UnknownValueError     = UnknownValueError
+module.exports.UnknownValueError    = UnknownValueError
 module.exports.UndefinedValueError  = UndefinedValueError
