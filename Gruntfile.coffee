@@ -21,7 +21,7 @@ module.exports = (grunt) ->
         ext: '.js'
     watch:
       coffee:
-        files: ['src/*.coffee']
+        files: ['<%= path.src %>/*.coffee', '<%= path.test %>/*.coffee']
         tasks: 'build'
         options:
           spawn: false

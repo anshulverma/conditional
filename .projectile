@@ -10,3 +10,9 @@
 
 # Sourcemap
 -*.map
+
+# Built source files
+-lib/
+
+# Documentation
+-docs/
