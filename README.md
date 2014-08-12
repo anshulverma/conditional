@@ -75,6 +75,9 @@ $ npm install node-preconditions
 
 The usage of various checks differs slightly as explained.
 
+Each check accepts a callback function as the last parameter. If passed, and if the check fails, the
+callback will be invoked with the error.
+
 One important thing to note for all types of checks is that the error stack trace do not include
 frames that point to methods of this module.
 
@@ -82,7 +85,7 @@ frames that point to methods of this module.
 
 Checks whether argument satisfies certain condition.
 
-> `checkArgument(condition:boolean|object, [message:string]) throws IllegalArgumentError`
+> `checkArgument(condition:boolean|object, [message:string], [callback:function]) throws IllegalArgumentError`
 
 This will throw `IllegalArgumentError` with message equal to the supplied string if `condition` is
 `false` or `undefined`. If `message` is not provided, a default value of `"invalid argument"` is
@@ -102,7 +105,7 @@ function demo(arg) {
 
 Check for making sure that a variable contains numerical value.
 
-> `checkNumberType(value:*, [message:string]) throws InvalidTypeError`
+> `checkNumberType(value:*, [message:string], [callback:function]) throws InvalidTypeError`
 
 In some cases you want to make sure that only numerical value are sent to a method. For example, a
 method called `square(x)` which takes a numerical value x and returns its squared value. This method
@@ -123,7 +126,7 @@ function square(x) {
 
 Check if a value is contained in another.
 
-> `checkContains(value:*, object:*, [message:string]) throws UnknownValueError`
+> `checkContains(value:*, object:*, [message:string], [callback:function]) throws UnknownValueError`
 
 This is a very flexible check since it can allow contains check with numbers, strings, arrays or
 regular objects. Here are some of the rules it follows:
@@ -150,7 +153,7 @@ function installPackage(userInput) {
 
 Check if two values are equal.
 
-> `checkContains(actual:*, expected:*, [message:string]) throws UnknownValueError`
+> `checkContains(actual:*, expected:*, [message:string], [callback:function]) throws UnknownValueError`
 
 Similar to contains check, this check also allows you to check against any data type. It follows
 these rules:
@@ -176,7 +179,7 @@ function login(password) {
 
 Check if a value is defined (or in other words, not undefined).
 
-> `checkDefined(value:*, [message:string]) throws UndefinedValueError`
+> `checkDefined(value:*, [message:string], [callback:function]) throws UndefinedValueError`
 
 This check follows these rules:
 - an empty string is not undefined
