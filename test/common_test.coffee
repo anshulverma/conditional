@@ -15,32 +15,32 @@ FORCED_ERROR = 'this must fail'
 executors = [
   {
     name: 'argument'
-    execute: (errorMessage) -> checkArgument false, errorMessage
+    execute: (errorMessage, callback) -> checkArgument false, errorMessage, callback
     errorType: IllegalArgumentError
     defaultErrorMessage: 'invalid argument'
   }
   {
     name: 'type'
-    execute: (errorMessage) -> checkNumberType 'string', errorMessage
+    execute: (errorMessage, callback) -> checkNumberType 'string', errorMessage, callback
     errorType: InvalidTypeError
     defaultErrorMessage: 'invalid type'
   }
   {
     name: 'contains'
-    execute: (errorMessage) -> checkContains 'd', ['a', 'b', 'c'], errorMessage
+    execute: (errorMessage, callback) -> checkContains 'd', ['a', 'b', 'c'], errorMessage, callback
     errorType: UnknownValueError
     defaultErrorMessage: "unknown value 'd'"
   }
   {
     name: 'equals'
-    execute: (errorMessage) -> checkEquals 'a', 'b', errorMessage
+    execute: (errorMessage, callback) -> checkEquals 'a', 'b', errorMessage, callback
     errorType: UnknownValueError
     defaultErrorMessage: "expected 'b' but got 'a'"
   }
   {
     name: 'defined'
-    execute: (errorMessage) -> checkDefined {}.undefined, errorMessage
-    errorType: UnknownValueError
+    execute: (errorMessage, callback) -> checkDefined {}.undefined, errorMessage, callback
+    errorType: UndefinedValueError
     defaultErrorMessage: "undefined value"
   }
 ]
@@ -74,3 +74,10 @@ describe 'common tests for preconditions', ->
         assert.throws executor.execute,
                       executor.errorType,
                       executor.defaultErrorMessage
+
+  describe 'can call precondition with a callback', ->
+    runTests (executor) ->
+      it "#{executor.name} check", ->
+        executor.execute FORCED_ERROR, (err) ->
+          assert.equal FORCED_ERROR, err.message
+          assert.instanceOf err, executor.errorType

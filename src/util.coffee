@@ -1,7 +1,13 @@
+negate = (fn) ->
+  (value) ->
+    not fn value
+
 isObject = (value) ->
   value? and typeof value is 'object'
 
 isArray = Array.isArray
+
+isNotArray = negate isArray
 
 # refer to this snippet from jQuery for explanation:
 # https://github.com/jquery/jquery/blob/bbdfb/src/core.js#L212
@@ -21,15 +27,25 @@ isEmptyString = (value) ->
 isUndefined = (value) ->
   typeof value is 'undefined'
 
-negate = (fn) ->
-  (value) ->
-    not fn value
+isNotUndefined = negate isUndefined
+
+isEqual = (actual, expected) ->
+  switch
+    when isArray expected
+      return false if isNotArray(actual) or actual.length isnt expected.length
+      for i in [0...expected.length]
+        return false unless isEqual(actual[i], expected[i]) and isNotUndefined actual[i]
+    when isObject expected
+      for key, value of expected
+        return false unless isEqual actual[key], value
+    when actual isnt expected then return false
+  true
 
 # export all utility methods
 module.exports.isObject         = isObject
 
 module.exports.isArray          = isArray
-module.exports.isNotArray       = negate isArray
+module.exports.isNotArray       = isNotArray
 
 module.exports.isNumeric        = isNumeric
 
@@ -38,4 +54,6 @@ module.exports.isString         = isString
 module.exports.isEmptyString    = isEmptyString
 
 module.exports.isUndefined      = isUndefined
-module.exports.isNotUndefined   = negate isUndefined
+module.exports.isNotUndefined   = isNotUndefined
+
+module.exports.isEqual          = isEqual
