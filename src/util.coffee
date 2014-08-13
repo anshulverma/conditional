@@ -62,6 +62,10 @@ precondition = (check, defaultMessage, argc) ->
     catch e
       callback e
 
+# hide this file from the stack trace
+{trimStackTrace} = require './error_handler'
+trimStackTrace __filename
+
 # export all utility methods
 module.exports.isObject         = isObject
 
