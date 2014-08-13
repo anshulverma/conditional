@@ -96,7 +96,7 @@ If this check fails, a error will be thrown with the default message.
 - a custom message but no callback
 
 ``` js
-`checkArgument(typeof myVar === 'string', 'expecting string value')`
+checkArgument(typeof myVar === 'string', 'expecting string value')
 ```
 
 Upon failure, the above check will throw a error with the message `'expecting string value'`.
