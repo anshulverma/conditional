@@ -76,9 +76,12 @@ describe 'common tests for preconditions', ->
   describe 'preconditions return a default error message if none present', ->
     runTests (executor) ->
       it "#{executor.name} check", ->
-        assert.throws executor.execFail,
-                      executor.errorType,
-                      executor.defaultErrorMessage
+        try
+          do executor.execFail
+          assert.fail 'expected an exception to be thrown'
+        catch e
+          assert.instanceOf e, executor.errorType
+          assert.equal e.message, executor.defaultErrorMessage
 
   describe 'can call precondition with a callback', ->
     runTests (executor) ->

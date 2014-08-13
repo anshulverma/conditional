@@ -24,7 +24,7 @@ checkArgument = (condition, message) ->
 checkNumberType = (value, message) ->
   throw new InvalidTypeError(message) unless isNumeric value
 
-checkContains = (value, object, message) ->
+checkContains = (value, object, message = "unknown value '#{value}'") ->
   checkArgument object?, 'invalid collection value'
 
   invokeError = ->
