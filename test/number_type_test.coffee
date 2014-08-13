@@ -1,10 +1,6 @@
 {checkNumberType, InvalidTypeError} = preconditions
 
 describe 'test number type precondition', ->
-  it 'happy path test', ->
-    wrapper = -> checkNumberType 5, 'invalid numerical value'
-    assert.doesNotThrow wrapper
-
   it "boolean 'true' values are not numbers", ->
     wrapper = -> checkNumberType true, 'invalid numerical value'
     assert.throws wrapper, InvalidTypeError, 'invalid numerical value'

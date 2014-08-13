@@ -41,6 +41,27 @@ isEqual = (actual, expected) ->
     when actual isnt expected then return false
   true
 
+# throw error in a check by default
+DEFAULT_CALLBACK = (err) ->
+  throw err if err?
+
+# Wrap check function to properly assign defaults for `message` and `callback`
+precondition = (check, defaultMessage, argc) ->
+  ->
+    args = []
+    message = arguments[argc] || defaultMessage
+    callback = arguments[argc + 1] || DEFAULT_CALLBACK
+    if typeof message is 'function'
+      callback = message
+      message = defaultMessage
+    Array::push.call args, arg for arg in Array::splice.call arguments, 0, argc
+    Array::push.call args, message
+    try
+      check.apply @, args
+      callback null
+    catch e
+      callback e
+
 # export all utility methods
 module.exports.isObject         = isObject
 
@@ -57,3 +78,5 @@ module.exports.isUndefined      = isUndefined
 module.exports.isNotUndefined   = isNotUndefined
 
 module.exports.isEqual          = isEqual
+
+module.exports.precondition     = precondition

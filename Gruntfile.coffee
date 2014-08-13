@@ -4,9 +4,10 @@ module.exports = (grunt) ->
   grunt.initConfig
     env:
       options:
-        concat:
-          value: 'node_modules/.bin'
-          delimiter: ':'
+        PATH:
+          concat:
+            value: 'node_modules/.bin'
+            delimiter: ':'
       dev:
         NODE_ENV: 'development'
       coverage:
