@@ -117,9 +117,9 @@ checkArgument(typeof myVar === 'string', function(err) {
 });
 ```
 
-As you can notice, if you call the precondition with a callback, you can
-make sure that the callback will be invoked if the check fails. Since,
-we didn't specify a custom message, a default on will be used.
+So, if a callback is passed to a check, it will be invoked with the
+error argument. Please note that the callback is invoked even if there
+was no error (in which case the error is `null`).
 
 - a custom message and a custom callback
 
