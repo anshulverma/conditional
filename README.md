@@ -49,7 +49,8 @@ findMax([4, 2, 1]);  // returns 4
 findMax([]);         // returns -Infinity
 ```
 
-This is just how `Math.max` works as described [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max).
+This is just how `Math.max` works as described
+[here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max).
 So, to avoid this scenario lets assert our assumption that the caller is not going to supply an
 empty array:
 
@@ -303,7 +304,7 @@ If you have a feature request or if you find a bug, please open a issue.
 
 The MIT License (MIT)
 
-Copyright (c) 2014 anshulverma
+Copyright (c) 2014 Anshul Verma
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
