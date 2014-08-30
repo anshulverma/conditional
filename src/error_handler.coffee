@@ -1,11 +1,6 @@
 # a list of unwanted frames
 unwanted = []
 
-# export initialization method
-module.exports.trimStackTrace = (file) -> unwanted.push file
-
-module.exports.overrideStack = -> do overrideStack
-
 # override stack to hide certain frames
 overrideStack = ->
   # remove unwanted frames from stack trace
@@ -13,4 +8,9 @@ overrideStack = ->
   Error.prepareStackTrace = (err, stack) ->
     stack.splice(0, 1) while do stack[0].getFileName in unwanted
     prepareStackTrace err, stack
+
+# this should be sufficient in non-test environment
 do overrideStack
+
+module.exports.trimStackTrace = (file) -> unwanted.push file
+module.exports.overrideStack = -> do overrideStack
