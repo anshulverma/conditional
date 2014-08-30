@@ -1,6 +1,6 @@
 {
-  "name": "node-preconditions",
-  "version": "2.2.5",
+  "name": "conditional",
+  "version": "0.0.1",
   "description": "A preconditions package for node modules based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anshulverma/node-preconditions"
+    "url": "https://github.com/anshulverma/conditional"
   },
   "dependencies": {},
   "devDependencies": {
@@ -38,6 +38,7 @@
     "coffee-script",
     "grunt",
     "preconditions",
+    "conditional",
     "coverage"
   ],
   "engines": {
