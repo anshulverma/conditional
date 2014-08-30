@@ -1,7 +1,7 @@
 {
   "name": "conditional",
   "version": "2.2.5",
-  "description": "A preconditions package for node modules based on Google's Preconditions library",
+  "description": "A preconditions package based on Google's Preconditions library",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
   "main": "lib/main.js",
