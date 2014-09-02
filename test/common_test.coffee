@@ -4,10 +4,12 @@
   checkContains
   checkEquals
   checkDefined
+  checkNotEmpty
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
   UndefinedValueError
+  IllegalValueError
 } = preconditions
 
 FORCED_ERROR = 'this must fail'
@@ -46,7 +48,14 @@ executors = [
     execFail: (errorMessage, callback) -> checkDefined {}.undefined, errorMessage, callback
     execPass: (callback) -> checkDefined true, callback
     errorType: UndefinedValueError
-    defaultErrorMessage: "undefined value"
+    defaultErrorMessage: 'undefined value'
+  }
+  {
+    name: 'empty'
+    execFail: (errorMessage, callback) -> checkNotEmpty '', errorMessage, callback
+    execPass: (callback) -> checkNotEmpty 'string', callback
+    errorType: IllegalValueError
+    defaultErrorMessage: 'illegal value'
   }
 ]
 

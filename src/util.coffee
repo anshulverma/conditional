@@ -14,6 +14,9 @@ isNotArray = negate isArray
 isNumeric = (value) ->
   !isArray(value) && (value - parseFloat(value) + 1) >= 0
 
+isBoolean = (value) ->
+  typeof value is 'boolean'
+
 toString = Object.prototype.toString
 
 # refer to underscore.js for explanation
@@ -40,6 +43,9 @@ isEqual = (actual, expected) ->
         return false unless isEqual actual[key], value
     when actual isnt expected then return false
   true
+
+isPrimitive = (value) ->
+  isNumeric(value) or isBoolean(value)
 
 # throw error in a check by default
 DEFAULT_CALLBACK = (err) ->
@@ -82,5 +88,7 @@ module.exports.isUndefined      = isUndefined
 module.exports.isNotUndefined   = isNotUndefined
 
 module.exports.isEqual          = isEqual
+
+module.exports.isPrimitive      = isPrimitive
 
 module.exports.precondition     = precondition
