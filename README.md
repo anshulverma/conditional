@@ -20,6 +20,7 @@ conditional
         - [Contains check](#contains-check)
         - [Equals check](#equals-check)
         - [Defined check](#defined-check)
+        - [Empty check](#empty-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -258,6 +259,29 @@ var checkDefined = require('conditional').checkDefined;
 
 function sendMessage(message) {
   checkDefined(message, 'a valid message required')
+
+  // proceed to send the message
+}
+```
+
+### Empty check
+
+Check if a value is empty or not.
+
+> `checkNotEmpty(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
+
+`notEmpty` check follows these rules:
+- `null` value is empty
+- empty array or object (i.e. `{}`) is also considered empty
+- empty string is obviously considered empty
+- value 0 (zero) or `false` are not considered empty
+
+``` js
+var checkNotEmpty = require('conditional').checkNotEmpty
+
+function sendMessage(message) {
+  checkNotEmpty(message, 'message must not be empty');
 
   // proceed to send the message
 }

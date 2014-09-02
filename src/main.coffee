@@ -7,6 +7,7 @@
   isNotUndefined
   isUndefined
   isEqual
+  isPrimitive
   precondition
 } = require './util'
 
@@ -15,6 +16,7 @@ DEFAULT_MESSAGES =
   INVALID_TYPE     : 'invalid type'
   UNKNOWN_VALUE    : 'unknown value'
   UNDEFINED_VALUE  : 'undefined value'
+  ILLEGAL_VALUE    : 'illegal value'
 
 checkArgument = (condition, message) ->
   throw new IllegalArgumentError(message) unless isString(condition) or
@@ -50,6 +52,20 @@ checkEquals = (actual,
 checkDefined = (value, message) ->
   throw new UndefinedValueError message if isUndefined(value) or not value?
 
+checkNotEmpty = (value, message) ->
+  invokeError = ->
+    throw new IllegalValueError message
+
+  return if isPrimitive value
+
+  if value is null or isUndefined(value) or value.length is 0
+    do invokeError
+  else
+    hasOwnProperty = Object.prototype.hasOwnProperty
+    for key of value
+      return if (hasOwnProperty.call(value, key))
+    do invokeError
+
 AbstractError = (@message) ->
   Error.call(@)
   Error.captureStackTrace(@, arguments.callee)
@@ -65,6 +81,8 @@ class UnknownValueError extends AbstractError
 
 class UndefinedValueError extends AbstractError
 
+class IllegalValueError extends AbstractError
+
 # hide this file from the stack trace
 {trimStackTrace} = require './error_handler'
 trimStackTrace __filename
@@ -75,10 +93,11 @@ module.exports.checkNumberType = precondition checkNumberType, DEFAULT_MESSAGES.
 module.exports.checkContains   = precondition checkContains, null, 2
 module.exports.checkEquals     = precondition checkEquals, null, 2
 module.exports.checkDefined    = precondition checkDefined, DEFAULT_MESSAGES.UNDEFINED_VALUE, 1
+module.exports.checkNotEmpty   = precondition checkNotEmpty, DEFAULT_MESSAGES.ILLEGAL_VALUE, 1
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
 module.exports.InvalidTypeError     = InvalidTypeError
-module.exports.InvalidTypeError     = InvalidTypeError
 module.exports.UnknownValueError    = UnknownValueError
 module.exports.UndefinedValueError  = UndefinedValueError
+module.exports.IllegalValueError    = IllegalValueError
