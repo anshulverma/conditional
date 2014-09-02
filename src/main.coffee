@@ -48,7 +48,7 @@ checkEquals = (actual,
   throw new UnknownValueError(message) unless isEqual actual, expected
 
 checkDefined = (value, message) ->
-  throw new UndefinedValueError message if isUndefined value
+  throw new UndefinedValueError message if isUndefined(value) or not value?
 
 AbstractError = (@message) ->
   Error.call(@)

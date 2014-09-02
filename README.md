@@ -1,17 +1,17 @@
-node-preconditions
+conditional
 ==================
 
-[![Build Status](https://travis-ci.org/anshulverma/node-preconditions.svg?branch=master)](https://travis-ci.org/anshulverma/node-preconditions)
-[![Dependency Status](https://gemnasium.com/anshulverma/node-preconditions.svg)](https://gemnasium.com/anshulverma/node-preconditions)
-[![Coverage Status](https://img.shields.io/coveralls/anshulverma/node-preconditions.svg)](https://coveralls.io/r/anshulverma/node-preconditions?branch=master)
-[![NPM version](https://badge.fury.io/js/node-preconditions.svg)](http://badge.fury.io/js/node-preconditions)
+[![Build Status](https://travis-ci.org/anshulverma/conditional.svg?branch=master)](https://travis-ci.org/anshulverma/conditional)
+[![Dependency Status](https://gemnasium.com/anshulverma/conditional.svg)](https://gemnasium.com/anshulverma/conditional)
+[![Coverage Status](https://img.shields.io/coveralls/anshulverma/conditional.svg)](https://coveralls.io/r/anshulverma/conditional?branch=master)
+[![NPM version](https://badge.fury.io/js/conditional.svg)](http://badge.fury.io/js/conditional)
 
-[![NPM](https://nodei.co/npm/node-preconditions.png?stars=true&downloads=true)](https://nodei.co/npm/node-preconditions/)
+[![NPM](https://nodei.co/npm/conditional.png?stars=true&downloads=true)](https://nodei.co/npm/conditional/)
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
-- [node-preconditions](#node-preconditions)
+- [conditional](#conditional)
     - [Summary](#summary)
     - [Installation](#installation)
     - [Usage](#usage)
@@ -74,7 +74,7 @@ findMax([]);  // throws "IllegalArgumentError: array is empty"
 ## Installation
 
 ``` bash
-$ npm install node-preconditions
+$ npm install conditional
 ```
 
 ## Usage
@@ -149,7 +149,7 @@ supplied string if `condition` is `false` or `undefined`. If `message`
 is not provided, a default value of `"invalid argument"` is assumed.
 
 ``` js
-var checkArgument = require('node-preconditions').checkArgument;
+var checkArgument = require('conditional').checkArgument;
 
 function demo(arg) {
   checkArgument(arg === 'test', "argument must be equal to 'test'");
@@ -172,7 +172,7 @@ that the user will be sending a numerical value only. As we already know
 by now, it is always better to put our assumptions in code:
 
 ``` js
-var checkNumberType = require('node-preconditions').checkNumberType;
+var checkNumberType = require('conditional').checkNumberType;
 
 function square(x) {
   checkNumberType(x, 'only numerical values can be squared');
@@ -200,7 +200,7 @@ it follows:
 numbers and string are considered different in this case).
 
 ``` js
-var checkContains = require('node-preconditions').checkContains;
+var checkContains = require('conditional').checkContains;
 
 function installPackage(userInput) {
   checkContains(userInput, ['yes', 'y', 'no', 'n'], 'invalid input');
@@ -230,7 +230,7 @@ any data type. It follows these rules:
 `{val1 : 1, val2: 2}` is same as `{val2: 2, val1: 1}`
 
 ``` js
-var checkEquals = require('node-preconditions').checkEquals;
+var checkEquals = require('conditional').checkEquals;
 
 function login(password) {
   checkEquals(password, 'expected-password', 'invalid password');
@@ -247,14 +247,14 @@ Check if a value is defined (or in other words, not undefined).
 >> `throws UndefinedValueError`
 
 This check follows these rules:
-- `null` is a defined value
+- `null` is a not defined value
 - an empty string is not undefined
 - 0 (zero) is not undefined
 - an empty array is not undefined
 - an empty object is not undefined
 
 ``` js
-var checkDefined = require('node-preconditions').checkDefined;
+var checkDefined = require('conditional').checkDefined;
 
 function sendMessage(message) {
   checkDefined(message, 'a valid message required')
