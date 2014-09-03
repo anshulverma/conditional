@@ -37,7 +37,8 @@ isEqual = (actual, expected) ->
     when isArray expected
       return false if isNotArray(actual) or actual.length isnt expected.length
       for i in [0...expected.length]
-        return false unless isEqual(actual[i], expected[i]) and isNotUndefined actual[i]
+        return false unless isEqual(actual[i], expected[i]) and
+                            isNotUndefined actual[i]
     when isObject expected
       for key, value of expected
         return false unless isEqual actual[key], value
@@ -47,32 +48,13 @@ isEqual = (actual, expected) ->
 isPrimitive = (value) ->
   isNumeric(value) or isBoolean(value)
 
-# throw error in a check by default
-DEFAULT_CALLBACK = (err) ->
-  throw err if err?
-
-# Wrap check function to properly assign defaults for `message` and `callback`
-precondition = (check, defaultMessage, argc) ->
-  ->
-    args = []
-    message = arguments[argc] || defaultMessage
-    callback = arguments[argc + 1] || DEFAULT_CALLBACK
-    if typeof message is 'function'
-      callback = message
-      message = defaultMessage
-    Array::push.call args, arg for arg in Array::splice.call arguments, 0, argc
-    Array::push.call args, message
-    try
-      check.apply @, args
-      callback null
-    catch e
-      callback e
-
 # hide this file from the stack trace
 {trimStackTrace} = require './error_handler'
 trimStackTrace __filename
 
 # export all utility methods
+module.exports.negate           = negate
+
 module.exports.isObject         = isObject
 
 module.exports.isArray          = isArray
@@ -90,5 +72,3 @@ module.exports.isNotUndefined   = isNotUndefined
 module.exports.isEqual          = isEqual
 
 module.exports.isPrimitive      = isPrimitive
-
-module.exports.precondition     = precondition

@@ -8,8 +8,133 @@
   isUndefined
   isEqual
   isPrimitive
-  precondition
 } = require './util'
+
+# throw error in a checker by default
+DEFAULT_CALLBACK = (err) ->
+  throw err if err?
+
+class Checker
+  constructor: (@name, @argc = 1) ->
+    module.exports[@name] = => @check.apply @, arguments
+
+  check: ->
+    message = arguments[@argc]
+    callback = arguments[@argc + 1] || DEFAULT_CALLBACK
+    if typeof message is 'function'
+      callback = message
+      message = null
+
+    args = []
+    Array::push.call args, arg for arg in Array::splice.call arguments, 0, @argc
+
+    message ?= @getErrorMessage.apply @, args
+    try
+      @invokeError message unless @doCheck.apply @, args
+      callback null
+    catch e
+      callback e
+
+  invokeError: ->
+    throw new Error 'something went wrong'
+
+  doCheck: ->
+    false
+
+  getErrorMessage: ->
+    null
+
+class ArgumentChecker extends Checker
+  constructor: ->
+    super 'checkArgument'
+
+  doCheck: (condition) ->
+    isString(condition) or isNumeric(condition) or condition
+
+  invokeError: (message) ->
+    throw new IllegalArgumentError message
+
+  getErrorMessage: ->
+    DEFAULT_MESSAGES.INVALID_ARGUMENT
+
+class NumberTypeChecker extends Checker
+  constructor: ->
+    super 'checkNumberType'
+
+  doCheck: (value) ->
+    isNumeric value
+
+  invokeError: (message) ->
+    throw new InvalidTypeError message
+
+  getErrorMessage: ->
+    DEFAULT_MESSAGES.INVALID_TYPE
+
+class ContainsChecker extends Checker
+  constructor: ->
+    super 'checkContains', 2
+
+  doCheck: (value, object) ->
+    argumentChecker.check object, 'invalid collection value'
+
+    switch
+      when isString object
+        not ((not isString value) or
+             (value.length > object.length) or
+             ((isEmptyString(object) ^ isEmptyString(value))) or
+             (not (isEmptyString(object) or value in object)))
+      when isArray object then value in object
+      when isNumeric object then ~object.toString().indexOf value
+      else value of object
+
+  invokeError: (message) ->
+    throw new UnknownValueError message
+
+  getErrorMessage: (value, object) ->
+    "unknown value '#{value}'"
+
+class EqualsChecker extends Checker
+  constructor: ->
+    super 'checkEquals', 2
+
+  doCheck: (actual, expected) ->
+    argumentChecker.check isNotUndefined(expected), 'invalid value expected'
+    isEqual actual, expected
+
+  invokeError: (message) ->
+    throw new UnknownValueError message
+
+  getErrorMessage: (actual, expected) ->
+    "expected '#{expected}' but got '#{actual}'"
+
+class DefinedChecker extends Checker
+  constructor: ->
+    super 'checkDefined'
+
+  doCheck: (value) ->
+    isNotUndefined value
+
+  invokeError: (message) ->
+    throw new UndefinedValueError message
+
+  getErrorMessage: ->
+    DEFAULT_MESSAGES.UNDEFINED_VALUE
+
+class NotEmptyChecker extends Checker
+  constructor: ->
+    super 'checkNotEmpty'
+
+  doCheck: (value) ->
+    value isnt null and isNotUndefined(value) and
+      (isPrimitive(value) or
+      (hasOwnProperty.call(value, 'length') and value.length isnt 0) or
+      (typeof value is 'object' and Object.keys(value).length isnt 0))
+
+  invokeError: (message) ->
+    throw new IllegalValueError message
+
+  getErrorMessage: ->
+    DEFAULT_MESSAGES.ILLEGAL_VALUE
 
 DEFAULT_MESSAGES =
   INVALID_ARGUMENT : 'invalid argument'
@@ -17,54 +142,6 @@ DEFAULT_MESSAGES =
   UNKNOWN_VALUE    : 'unknown value'
   UNDEFINED_VALUE  : 'undefined value'
   ILLEGAL_VALUE    : 'illegal value'
-
-checkArgument = (condition, message) ->
-  throw new IllegalArgumentError(message) unless isString(condition) or
-                                                 isNumeric(condition) or
-                                                 condition
-
-checkNumberType = (value, message) ->
-  throw new InvalidTypeError(message) unless isNumeric value
-
-checkContains = (value, object, message = "unknown value '#{value}'") ->
-  checkArgument object?, 'invalid collection value'
-
-  invokeError = ->
-    throw new UnknownValueError(message)
-
-  switch
-    when isString object
-      if (not isString value) or
-         (value.length > object.length) or
-         ((isEmptyString(object) ^ isEmptyString(value))) or
-         (not (isEmptyString(object) or value in object))
-        do invokeError
-    when isArray object then do invokeError unless value in object
-    when isNumeric object then do invokeError unless ~object.toString().indexOf value
-    else do invokeError unless value of object
-
-checkEquals = (actual,
-               expected,
-               message = "expected '#{expected}' but got '#{actual}'") ->
-  checkArgument isNotUndefined(expected), 'invalid value expected'
-  throw new UnknownValueError(message) unless isEqual actual, expected
-
-checkDefined = (value, message) ->
-  throw new UndefinedValueError message if isUndefined value
-
-checkNotEmpty = (value, message) ->
-  invokeError = ->
-    throw new IllegalValueError message
-
-  return if isPrimitive value
-
-  if value is null or isUndefined(value) or value.length is 0
-    do invokeError
-  else
-    hasOwnProperty = Object.prototype.hasOwnProperty
-    for key of value
-      return if (hasOwnProperty.call(value, key))
-    do invokeError
 
 AbstractError = (@message) ->
   Error.call(@)
@@ -88,12 +165,12 @@ class IllegalValueError extends AbstractError
 trimStackTrace __filename
 
 # export all preconditions
-module.exports.checkArgument   = precondition checkArgument, DEFAULT_MESSAGES.INVALID_ARGUMENT, 1
-module.exports.checkNumberType = precondition checkNumberType, DEFAULT_MESSAGES.INVALID_TYPE, 1
-module.exports.checkContains   = precondition checkContains, null, 2
-module.exports.checkEquals     = precondition checkEquals, null, 2
-module.exports.checkDefined    = precondition checkDefined, DEFAULT_MESSAGES.UNDEFINED_VALUE, 1
-module.exports.checkNotEmpty   = precondition checkNotEmpty, DEFAULT_MESSAGES.ILLEGAL_VALUE, 1
+argumentChecker = new ArgumentChecker
+new NumberTypeChecker
+new ContainsChecker
+new EqualsChecker
+new DefinedChecker
+new NotEmptyChecker
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError

@@ -36,12 +36,30 @@ describe 'test equality precondition', ->
       assert.throws wrapper, UnknownValueError, 'expecting {val2: a}'
 
     it 'nested object test', ->
-      wrapper = -> checkEquals {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}},
-                               {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}}
+      wrapper = ->
+        checkEquals {
+          val: 'a'
+          arr: [1, 2, {x: 'y'}]
+          inner: {val2: 2}
+        },
+        {
+          val: 'a'
+          arr: [1, 2, {x: 'y'}]
+          inner: {val2: 2}
+        }
       assert.doesNotThrow wrapper
-      wrapper = -> checkEquals {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 1}},
-                               {val: 'a', arr: [1, 2, {x: 'y'}], inner: {val2: 2}},
-                               'expecting val2 to be 2'
+      wrapper = ->
+        checkEquals {
+          val: 'a'
+          arr: [1, 2, {x: 'y'}]
+          inner: {val2: 1}
+        },
+        {
+          val: 'a'
+          arr: [1, 2, {x: 'y'}]
+          inner: {val2: 2}
+        },
+        'expecting val2 to be 2'
       assert.throws wrapper, UnknownValueError, 'expecting val2 to be 2'
 
   describe 'undefined and null values equality tests', ->
