@@ -125,7 +125,6 @@ class NotEmptyChecker extends Checker
     super 'checkNotEmpty'
 
   doCheck: (value) ->
-    hasOwnProperty = Object.prototype.hasOwnProperty
     value isnt null and isNotUndefined(value) and
       (isPrimitive(value) or
       (hasOwnProperty.call(value, 'length') and value.length isnt 0) or
