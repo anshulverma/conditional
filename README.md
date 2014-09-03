@@ -248,7 +248,7 @@ Check if a value is defined (or in other words, not undefined).
 >> `throws UndefinedValueError`
 
 This check follows these rules:
-- `null` is a not defined value
+- `null` is a defined value
 - an empty string is not undefined
 - 0 (zero) is not undefined
 - an empty array is not undefined

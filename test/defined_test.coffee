@@ -1,4 +1,4 @@
-{checkDefined, UndefinedValueError} = preconditions
+{checkDefined} = preconditions
 
 describe 'test defined precondition', ->
   it 'empty string is not undefined', ->
@@ -17,6 +17,6 @@ describe 'test defined precondition', ->
     wrapper = -> checkDefined {}, 'expecting empty object'
     assert.doesNotThrow wrapper
 
-  it 'null is not a defined value', ->
-    wrapper = -> checkDefined null, 'not expecting null'
-    assert.throws wrapper, UndefinedValueError, 'not expecting null'
+  it 'null is a defined value', ->
+    wrapper = -> checkDefined null, 'expecting null'
+    assert.doesNotThrow wrapper
