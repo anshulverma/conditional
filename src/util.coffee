@@ -37,7 +37,8 @@ isEqual = (actual, expected) ->
     when isArray expected
       return false if isNotArray(actual) or actual.length isnt expected.length
       for i in [0...expected.length]
-        return false unless isEqual(actual[i], expected[i]) and isNotUndefined actual[i]
+        return false unless isEqual(actual[i], expected[i]) and
+                            isNotUndefined actual[i]
     when isObject expected
       for key, value of expected
         return false unless isEqual actual[key], value

@@ -17,42 +17,48 @@ FORCED_ERROR = 'this must fail'
 executors = [
   {
     name: 'argument'
-    execFail: (errorMessage, callback) -> checkArgument false, errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkArgument false, errorMessage, callback
     execPass: (callback) -> checkArgument true, callback
     errorType: IllegalArgumentError
     defaultErrorMessage: 'invalid argument'
   }
   {
     name: 'type'
-    execFail: (errorMessage, callback) -> checkNumberType 'string', errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkNumberType 'string', errorMessage, callback
     execPass: (callback) -> checkNumberType 123, callback
     errorType: InvalidTypeError
     defaultErrorMessage: 'invalid type'
   }
   {
     name: 'contains'
-    execFail: (errorMessage, callback) -> checkContains 'd', ['a', 'b', 'c'], errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkContains 'd', ['a', 'b', 'c'], errorMessage, callback
     execPass: (callback) -> checkContains 'a', ['a'], callback
     errorType: UnknownValueError
     defaultErrorMessage: "unknown value 'd'"
   }
   {
     name: 'equals'
-    execFail: (errorMessage, callback) -> checkEquals 'a', 'b', errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkEquals 'a', 'b', errorMessage, callback
     execPass: (callback) -> checkEquals true, true, callback
     errorType: UnknownValueError
     defaultErrorMessage: "expected 'b' but got 'a'"
   }
   {
     name: 'defined'
-    execFail: (errorMessage, callback) -> checkDefined {}.undefined, errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkDefined {}.undefined, errorMessage, callback
     execPass: (callback) -> checkDefined true, callback
     errorType: UndefinedValueError
     defaultErrorMessage: 'undefined value'
   }
   {
     name: 'empty'
-    execFail: (errorMessage, callback) -> checkNotEmpty '', errorMessage, callback
+    execFail: (errorMessage, callback) ->
+      checkNotEmpty '', errorMessage, callback
     execPass: (callback) -> checkNotEmpty 'string', callback
     errorType: IllegalValueError
     defaultErrorMessage: 'illegal value'
