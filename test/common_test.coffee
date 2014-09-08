@@ -5,11 +5,13 @@
   checkEquals
   checkDefined
   checkNotEmpty
+  checkState
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
   UndefinedValueError
   IllegalValueError
+  IllegalStateError
 } = preconditions
 
 FORCED_ERROR = 'this must fail'
@@ -62,6 +64,14 @@ executors = [
     execPass: (callback) -> checkNotEmpty 'string', callback
     errorType: IllegalValueError
     defaultErrorMessage: 'illegal value'
+  }
+  {
+    name: 'state'
+    execFail: (errorMessage, callback) ->
+      checkState false, errorMessage, callback
+    execPass: (callback) -> checkState true, callback
+    errorType: IllegalStateError
+    defaultErrorMessage: 'illegal state'
   }
 ]
 
