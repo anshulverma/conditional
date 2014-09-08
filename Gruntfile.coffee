@@ -12,6 +12,8 @@ module.exports = (grunt) ->
         NODE_ENV: 'development'
       coverage:
         NODE_ENV: 'coverage'
+      debug:
+        DEBUG: grunt.option 'dbg'
     coffee:
       compile:
         expand: true
@@ -36,7 +38,7 @@ module.exports = (grunt) ->
           ]
       test:
         options:
-          reporter: 'spec'
+          reporter: 'hierarchical-reporter'
           colors: true
         src: [ '<%= path.test %>/*.coffee' ]
       coverageHTML:
@@ -127,7 +129,7 @@ module.exports = (grunt) ->
       '_coverage'
     ]
   grunt.registerTask 'docs',    ['clean:docs', 'docco']
-  grunt.registerTask 'test',    ['mochaTest:test']
+  grunt.registerTask 'test',    ['env:debug', 'mochaTest:test']
   grunt.registerTask 'default', ['test']
   grunt.registerTask 'build',
     [
