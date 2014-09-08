@@ -1,9 +1,14 @@
 {
   checkArgument
   checkNumberType
+  checkNotNumberType
   checkContains
+  checkDoesNotContain
   checkEquals
+  checkDoesNotEqual
   checkDefined
+  checkUndefined
+  checkEmpty
   checkNotEmpty
   checkState
   IllegalArgumentError
@@ -34,12 +39,28 @@ executors = [
     defaultErrorMessage: 'invalid type'
   }
   {
+    name: 'not-type'
+    execFail: (errorMessage, callback) ->
+      checkNotNumberType 123, errorMessage, callback
+    execPass: (callback) -> checkNotNumberType 'string', callback
+    errorType: InvalidTypeError
+    defaultErrorMessage: 'invalid type'
+  }
+  {
     name: 'contains'
     execFail: (errorMessage, callback) ->
       checkContains 'd', ['a', 'b', 'c'], errorMessage, callback
     execPass: (callback) -> checkContains 'a', ['a'], callback
     errorType: UnknownValueError
     defaultErrorMessage: "unknown value 'd'"
+  }
+  {
+    name: 'not-contains'
+    execFail: (errorMessage, callback) ->
+      checkDoesNotContain 'a', ['a'], errorMessage, callback
+    execPass: (callback) -> checkDoesNotContain 'd', ['a', 'b', 'c'], callback
+    errorType: UnknownValueError
+    defaultErrorMessage: "'a' is a known value"
   }
   {
     name: 'equals'
@@ -50,6 +71,15 @@ executors = [
     defaultErrorMessage: "expected 'b' but got 'a'"
   }
   {
+    name: 'not-equals'
+    execFail: (errorMessage, callback) ->
+      checkDoesNotEqual true, true, errorMessage, callback
+    execPass: (callback) ->
+      checkDoesNotEqual 'a', 'b', callback
+    errorType: UnknownValueError
+    defaultErrorMessage: "did not expect value 'true'"
+  }
+  {
     name: 'defined'
     execFail: (errorMessage, callback) ->
       checkDefined {}.undefined, errorMessage, callback
@@ -58,7 +88,23 @@ executors = [
     defaultErrorMessage: 'undefined value'
   }
   {
+    name: 'not-defined'
+    execFail: (errorMessage, callback) ->
+      checkUndefined true, errorMessage, callback
+    execPass: (callback) -> checkUndefined {}.undefined, callback
+    errorType: UndefinedValueError
+    defaultErrorMessage: "'true' is a defined value"
+  }
+  {
     name: 'empty'
+    execFail: (errorMessage, callback) ->
+      checkEmpty 'string', errorMessage, callback
+    execPass: (callback) -> checkEmpty '', callback
+    errorType: IllegalValueError
+    defaultErrorMessage: "'string' is not empty"
+  }
+  {
+    name: 'not-empty'
     execFail: (errorMessage, callback) ->
       checkNotEmpty '', errorMessage, callback
     execPass: (callback) -> checkNotEmpty 'string', callback

@@ -178,6 +178,9 @@ Check for making sure that a variable contains numerical value.
 > `checkNumberType(value:*, [message:string], [callback:function])`
 >> `throws InvalidTypeError`
 
+> `checkNotNumberType(value:*, [message:string], [callback:function])`
+>> `throws InvalidTypeError`
+
 In some cases you want to make sure that only numerical value are sent
 to a method. For example, a method called `square(x)` which takes a
 numerical value x and returns its squared value. This method expects
@@ -200,6 +203,12 @@ Check if a value is contained in another.
 
 > `checkContains(value:*, object:*, [message:string], [callback:function])`
 >> `throws UnknownValueError`
+
+> `checkDoesNotContain(value:*, object:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
+
+As expected `checkDoesNotContain` behave exactly opposite as its
+counterpart `checkContains`.
 
 This is a very flexible check since it can allow contains check with
 numbers, strings, arrays or regular objects. Here are some of the rules
@@ -228,7 +237,10 @@ function installPackage(userInput) {
 
 Check if two values are equal.
 
-> `checkContains(actual:*, expected:*, [message:string], [callback:function])`
+> `checkEquals(actual:*, expected:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
+
+> `checkDoesNotEqual(actual:*, expected:*, [message:string], [callback:function])`
 >> `throws UnknownValueError`
 
 Similar to contains check, this check also allows you to check against
@@ -259,6 +271,9 @@ Check if a value is defined (or in other words, not undefined).
 > `checkDefined(value:*, [message:string], [callback:function])`
 >> `throws UndefinedValueError`
 
+> `checkUndefined(value:*, [message:string], [callback:function])`
+>> `throws UndefinedValueError`
+
 This check follows these rules:
 - `null` is a defined value
 - an empty string is not undefined
@@ -279,6 +294,9 @@ function sendMessage(message) {
 ### Empty check
 
 Check if a value is empty or not.
+
+> `checkEmpty(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
 
 > `checkNotEmpty(value:*, [message:string], [callback:function])`
 >> `throws IllegalValueError`

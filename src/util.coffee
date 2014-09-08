@@ -52,6 +52,9 @@ isPrimitive = (value) ->
 {trimStackTrace} = require './error_handler'
 trimStackTrace __filename
 
+xor = (operand1, operand2) ->
+  !operand1 != !operand2
+
 # export all utility methods
 module.exports.negate           = negate
 
@@ -72,3 +75,6 @@ module.exports.isNotUndefined   = isNotUndefined
 module.exports.isEqual          = isEqual
 
 module.exports.isPrimitive      = isPrimitive
+module.exports.isNotPrimitive   = negate isPrimitive
+
+module.exports.xor              = xor

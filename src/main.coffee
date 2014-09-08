@@ -7,16 +7,20 @@
   isNotUndefined
   isUndefined
   isEqual
+  isNotPrimitive
   isPrimitive
+  xor
 } = require './util'
+debug = require('debug') 'conditional'
 
 # throw error in a checker by default
 DEFAULT_CALLBACK = (err) ->
   throw err if err?
 
 class Checker
-  constructor: (@name, @argc = 1) ->
+  constructor: (@name, @defaultMessage, @negate = false, @argc = 1) ->
     module.exports[@name] = => @check.apply @, arguments
+    debug "registered checker '#{@name}'"
 
   check: ->
     message = arguments[@argc]
@@ -30,7 +34,7 @@ class Checker
 
     message ?= @getErrorMessage.apply @, args
     try
-      @invokeError message unless @doCheck.apply @, args
+      @invokeError message unless xor @doCheck.apply(@, args), @negate
       callback null
     catch e
       callback e
@@ -42,11 +46,14 @@ class Checker
     false
 
   getErrorMessage: ->
-    null
+    if typeof @defaultMessage is 'function'
+      @defaultMessage.apply(@, arguments)
+    else
+      @defaultMessage
 
 class ArgumentChecker extends Checker
-  constructor: (name = 'checkArgument') ->
-    super name
+  constructor: (name, negate, message = DEFAULT_MESSAGES.INVALID_ARGUMENT) ->
+    super name, message, negate
 
   doCheck: (condition) ->
     isString(condition) or isNumeric(condition) or condition
@@ -54,12 +61,9 @@ class ArgumentChecker extends Checker
   invokeError: (message) ->
     throw new IllegalArgumentError message
 
-  getErrorMessage: ->
-    DEFAULT_MESSAGES.INVALID_ARGUMENT
-
 class NumberTypeChecker extends Checker
-  constructor: ->
-    super 'checkNumberType'
+  constructor: (name, negate, message = DEFAULT_MESSAGES.INVALID_TYPE) ->
+    super name, message, negate
 
   doCheck: (value) ->
     isNumeric value
@@ -67,12 +71,9 @@ class NumberTypeChecker extends Checker
   invokeError: (message) ->
     throw new InvalidTypeError message
 
-  getErrorMessage: ->
-    DEFAULT_MESSAGES.INVALID_TYPE
-
 class ContainsChecker extends Checker
-  constructor: ->
-    super 'checkContains', 2
+  constructor: (name, negate, message) ->
+    super name, message, negate, 2
 
   doCheck: (value, object) ->
     argumentChecker.check object, 'invalid collection value'
@@ -90,12 +91,9 @@ class ContainsChecker extends Checker
   invokeError: (message) ->
     throw new UnknownValueError message
 
-  getErrorMessage: (value, object) ->
-    "unknown value '#{value}'"
-
 class EqualsChecker extends Checker
-  constructor: ->
-    super 'checkEquals', 2
+  constructor: (name, negate, message) ->
+    super name, message, negate, 2
 
   doCheck: (actual, expected) ->
     argumentChecker.check isNotUndefined(expected), 'invalid value expected'
@@ -104,12 +102,9 @@ class EqualsChecker extends Checker
   invokeError: (message) ->
     throw new UnknownValueError message
 
-  getErrorMessage: (actual, expected) ->
-    "expected '#{expected}' but got '#{actual}'"
-
 class DefinedChecker extends Checker
-  constructor: ->
-    super 'checkDefined'
+  constructor: (name, negate, message = DEFAULT_MESSAGES.UNDEFINED_VALUE) ->
+    super name, message, negate
 
   doCheck: (value) ->
     isNotUndefined value
@@ -117,35 +112,25 @@ class DefinedChecker extends Checker
   invokeError: (message) ->
     throw new UndefinedValueError message
 
-  getErrorMessage: ->
-    DEFAULT_MESSAGES.UNDEFINED_VALUE
-
-class NotEmptyChecker extends Checker
-  constructor: ->
-    super 'checkNotEmpty'
+class EmptyChecker extends Checker
+  constructor: (name, negate, message = DEFAULT_MESSAGES.ILLEGAL_VALUE) ->
+    super name, message, negate
 
   doCheck: (value) ->
-    value isnt null and isNotUndefined(value) and
-      (isPrimitive(value) or
-      (hasOwnProperty.call(value, 'length') and value.length isnt 0) or
-      (typeof value is 'object' and Object.keys(value).length isnt 0))
+    value is null or isUndefined(value) or
+      (isNotPrimitive(value) and
+        ((hasOwnProperty.call(value, 'length') and value.length is 0) or
+        (typeof value is 'object' and Object.keys(value).length is 0)))
 
   invokeError: (message) ->
     throw new IllegalValueError message
 
-  getErrorMessage: ->
-    DEFAULT_MESSAGES.ILLEGAL_VALUE
-
-
 class StateChecker extends ArgumentChecker
-  constructor: ->
-    super 'checkState'
+  constructor: (name) ->
+    super name, false, DEFAULT_MESSAGES.ILLEGAL_STATE
 
   invokeError: (message) ->
     throw new IllegalStateError message
-
-  getErrorMessage: ->
-    DEFAULT_MESSAGES.ILLEGAL_STATE
 
 DEFAULT_MESSAGES =
   INVALID_ARGUMENT : 'invalid argument'
@@ -179,13 +164,30 @@ class IllegalStateError extends AbstractError
 trimStackTrace __filename
 
 # export all preconditions
-argumentChecker = new ArgumentChecker
-new NumberTypeChecker
-new ContainsChecker
-new EqualsChecker
-new DefinedChecker
-new NotEmptyChecker
-new StateChecker
+argumentChecker = new ArgumentChecker 'checkArgument'
+
+new NumberTypeChecker 'checkNumberType'
+new NumberTypeChecker 'checkNotNumberType', true
+
+new ContainsChecker 'checkContains', false,
+                    (value, object) -> "unknown value '#{value}'"
+new ContainsChecker 'checkDoesNotContain', true,
+                    (value, object) -> "'#{value}' is a known value"
+
+new EqualsChecker 'checkEquals', false,
+                  (actual, expected) ->
+                    "expected '#{expected}' but got '#{actual}'"
+new EqualsChecker 'checkDoesNotEqual', true,
+                  (actual) -> "did not expect value '#{actual}'"
+
+new DefinedChecker 'checkDefined'
+new DefinedChecker 'checkUndefined', true,
+                   (value) -> "'#{value}' is a defined value"
+
+new EmptyChecker 'checkEmpty', false, (value) -> "'#{value}' is not empty"
+new EmptyChecker 'checkNotEmpty', true
+
+new StateChecker 'checkState'
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
