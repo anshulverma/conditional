@@ -16,6 +16,7 @@ conditional
     - [Installation](#installation)
     - [Usage](#usage)
         - [Argument check](#argument-check)
+        - [State check](#state-check)
         - [Number type check](#number-type-check)
         - [Contains check](#contains-check)
         - [Equals check](#equals-check)
@@ -158,6 +159,17 @@ function demo(arg) {
   continueWithNormalOperation();
 }
 ```
+
+### State check
+
+This has a similar signature and usage as argument check defined
+above. The only difference is in the error type and default error
+message.
+
+> `checkState(condition:boolean|object, [message:string], [callback:function])`
+>> `throws IllegalStateError`
+
+The default value for error message is `"illegal state"`.
 
 ### Number type check
 

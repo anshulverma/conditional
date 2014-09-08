@@ -45,8 +45,8 @@ class Checker
     null
 
 class ArgumentChecker extends Checker
-  constructor: ->
-    super 'checkArgument'
+  constructor: (name = 'checkArgument') ->
+    super name
 
   doCheck: (condition) ->
     isString(condition) or isNumeric(condition) or condition
@@ -136,12 +136,24 @@ class NotEmptyChecker extends Checker
   getErrorMessage: ->
     DEFAULT_MESSAGES.ILLEGAL_VALUE
 
+
+class StateChecker extends ArgumentChecker
+  constructor: ->
+    super 'checkState'
+
+  invokeError: (message) ->
+    throw new IllegalStateError message
+
+  getErrorMessage: ->
+    DEFAULT_MESSAGES.ILLEGAL_STATE
+
 DEFAULT_MESSAGES =
   INVALID_ARGUMENT : 'invalid argument'
   INVALID_TYPE     : 'invalid type'
   UNKNOWN_VALUE    : 'unknown value'
   UNDEFINED_VALUE  : 'undefined value'
   ILLEGAL_VALUE    : 'illegal value'
+  ILLEGAL_STATE    : 'illegal state'
 
 AbstractError = (@message) ->
   Error.call(@)
@@ -160,6 +172,8 @@ class UndefinedValueError extends AbstractError
 
 class IllegalValueError extends AbstractError
 
+class IllegalStateError extends AbstractError
+
 # hide this file from the stack trace
 {trimStackTrace} = require './error_handler'
 trimStackTrace __filename
@@ -171,6 +185,7 @@ new ContainsChecker
 new EqualsChecker
 new DefinedChecker
 new NotEmptyChecker
+new StateChecker
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError
@@ -178,3 +193,4 @@ module.exports.InvalidTypeError     = InvalidTypeError
 module.exports.UnknownValueError    = UnknownValueError
 module.exports.UndefinedValueError  = UndefinedValueError
 module.exports.IllegalValueError    = IllegalValueError
+module.exports.IllegalStateError    = IllegalStateError
