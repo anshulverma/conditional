@@ -132,6 +132,16 @@ class StateChecker extends ArgumentChecker
   invokeError: (message) ->
     throw new IllegalStateError message
 
+class NullChecker extends Checker
+  constructor: (name, negate, message = DEFAULT_MESSAGES.NULL_VALUE) ->
+    super name, message, negate
+
+  doCheck: (value) ->
+    isUndefined(value) or value is null
+
+  invokeError: (message) ->
+    throw new IllegalValueError message
+
 DEFAULT_MESSAGES =
   INVALID_ARGUMENT : 'invalid argument'
   INVALID_TYPE     : 'invalid type'
@@ -139,6 +149,7 @@ DEFAULT_MESSAGES =
   UNDEFINED_VALUE  : 'undefined value'
   ILLEGAL_VALUE    : 'illegal value'
   ILLEGAL_STATE    : 'illegal state'
+  NULL_VALUE       : 'value is null'
 
 AbstractError = (@message) ->
   Error.call(@)
@@ -188,6 +199,9 @@ new EmptyChecker 'checkEmpty', false, (value) -> "'#{value}' is not empty"
 new EmptyChecker 'checkNotEmpty', true
 
 new StateChecker 'checkState'
+
+new NullChecker 'checkNull', false, (value) -> "'#{value}' is not null"
+new NullChecker 'checkNotNull', true
 
 # export error types
 module.exports.IllegalArgumentError = IllegalArgumentError

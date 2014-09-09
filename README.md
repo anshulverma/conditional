@@ -22,6 +22,7 @@ conditional
         - [Equals check](#equals-check)
         - [Defined check](#defined-check)
         - [Empty check](#empty-check)
+        - [Null check](#null-check)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -314,6 +315,45 @@ function sendMessage(message) {
   checkNotEmpty(message, 'message must not be empty');
 
   // proceed to send the message
+}
+```
+
+### Null check
+
+Check if value is `null` or `undefined`.
+
+> `checkNull(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
+
+> `checkNotNull(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
+
+In most cases, you'd be more interested in the `checkNotNull`
+precondition than the other. This `checkDefined` precondition is
+slightly different than this one as it does not check for `null`s. Here
+is an example:
+
+``` js
+var checkNotNull = require('conditional').checkNotNull;
+
+function parse(str) {
+  // do some string manipulation
+}
+
+function getUserInput(callback) {
+  readFromInput(function(err, str) {
+    if(err != null) {
+      callback(err);
+    } else {
+      checkNotNull(str, function (err) {
+        if(err != null) {
+          callback(null, null);
+        } else {
+          callback(null, parse(str));
+        }
+      });
+    }
+  });
 }
 ```
 
