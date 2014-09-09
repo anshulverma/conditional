@@ -144,7 +144,8 @@ below.
 
 Checks whether argument satisfies certain condition.
 
-> `checkArgument(condition:boolean|object, [message:string], [callback:function]) throws IllegalArgumentError`
+> `checkArgument(condition:boolean|object, [message:string], [callback:function])`
+>> `throws IllegalArgumentError`
 
 This will throw `IllegalArgumentError` with message equal to the
 supplied string if `condition` is `false` or `undefined`. If `message`
@@ -166,7 +167,8 @@ This has a similar signature and usage as argument check defined
 above. The only difference is in the error type and default error
 message.
 
-> `checkState(condition:boolean|object, [message:string], [callback:function]) throws IllegalStateError`
+> `checkState(condition:boolean|object, [message:string], [callback:function])`
+>> `throws IllegalStateError`
 
 The default value for error message is `"illegal state"`.
 
@@ -174,9 +176,11 @@ The default value for error message is `"illegal state"`.
 
 Check for making sure that a variable contains numerical value.
 
-> `checkNumberType(value:*, [message:string], [callback:function]) throws InvalidTypeError`
+> `checkNumberType(value:*, [message:string], [callback:function])`
+>> `throws InvalidTypeError`
 
-> `checkNotNumberType(value:*, [message:string], [callback:function]) throws InvalidTypeError`
+> `checkNotNumberType(value:*, [message:string], [callback:function])`
+>> `throws InvalidTypeError`
 
 In some cases you want to make sure that only numerical value are sent
 to a method. For example, a method called `square(x)` which takes a
@@ -198,9 +202,11 @@ function square(x) {
 
 Check if a value is contained in another.
 
-> `checkContains(value:*, object:*, [message:string], [callback:function]) throws UnknownValueError`
+> `checkContains(value:*, object:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
 
-> `checkDoesNotContain(value:*, object:*, [message:string], [callback:function]) throws UnknownValueError`
+> `checkDoesNotContain(value:*, object:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
 
 As expected `checkDoesNotContain` behave exactly opposite as its
 counterpart `checkContains`.
@@ -232,9 +238,11 @@ function installPackage(userInput) {
 
 Check if two values are equal.
 
-> `checkEquals(actual:*, expected:*, [message:string], [callback:function]) throws UnknownValueError`
+> `checkEquals(actual:*, expected:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
 
-> `checkDoesNotEqual(actual:*, expected:*, [message:string], [callback:function]) throws UnknownValueError`
+> `checkDoesNotEqual(actual:*, expected:*, [message:string], [callback:function])`
+>> `throws UnknownValueError`
 
 Similar to contains check, this check also allows you to check against
 any data type. It follows these rules:
@@ -261,9 +269,11 @@ function login(password) {
 
 Check if a value is defined (or in other words, not undefined).
 
-> `checkDefined(value:*, [message:string], [callback:function]) throws UndefinedValueError`
+> `checkDefined(value:*, [message:string], [callback:function])`
+>> `throws UndefinedValueError`
 
-> `checkUndefined(value:*, [message:string], [callback:function]) throws UndefinedValueError`
+> `checkUndefined(value:*, [message:string], [callback:function])`
+>> `throws UndefinedValueError`
 
 This check follows these rules:
 - `null` is a defined value
@@ -286,9 +296,11 @@ function sendMessage(message) {
 
 Check if a value is empty or not.
 
-> `checkEmpty(value:*, [message:string], [callback:function]) throws IllegalValueError`
+> `checkEmpty(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
 
-> `checkNotEmpty(value:*, [message:string], [callback:function]) throws IllegalValueError`
+> `checkNotEmpty(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
 
 `notEmpty` check follows these rules:
 - `null` value is empty
@@ -310,9 +322,11 @@ function sendMessage(message) {
 
 Check if value is `null` or `undefined`.
 
-> `checkNull(value:*, [message:string], [callback:function]) throws IllegalValueError`
+> `checkNull(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
 
-> `checkNotNull(value:*, [message:string], [callback:function]) throws IllegalValueError`
+> `checkNotNull(value:*, [message:string], [callback:function])`
+>> `throws IllegalValueError`
 
 In most cases, you'd be more interested in the `checkNotNull`
 precondition than the other. This `checkDefined` precondition is
