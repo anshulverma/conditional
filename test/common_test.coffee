@@ -11,6 +11,8 @@
   checkEmpty
   checkNotEmpty
   checkState
+  checkNull
+  checkNotNull
   IllegalArgumentError
   InvalidTypeError
   UnknownValueError
@@ -118,6 +120,22 @@ executors = [
     execPass: (callback) -> checkState true, callback
     errorType: IllegalStateError
     defaultErrorMessage: 'illegal state'
+  }
+  {
+    name: 'null'
+    execFail: (errorMessage, callback) ->
+      checkNull 'string', errorMessage, callback
+    execPass: (callback) -> checkNull null, callback
+    errorType: IllegalValueError
+    defaultErrorMessage: "'string' is not null"
+  }
+  {
+    name: 'not-null'
+    execFail: (errorMessage, callback) ->
+      checkNotNull null, errorMessage, callback
+    execPass: (callback) -> checkNotNull 'string', callback
+    errorType: IllegalValueError
+    defaultErrorMessage: 'value is null'
   }
 ]
 
