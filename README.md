@@ -145,7 +145,7 @@ below.
 Checks whether argument satisfies certain condition.
 
 ``` js
-checkArgument(condition:boolean|object, [message:string], [callback:function])
+checkArgument(condition:*, [message:string], [callback:function])
     throws IllegalArgumentError
 ```
 
@@ -170,7 +170,7 @@ above. The only difference is in the error type and default error
 message.
 
 ``` js
-checkState(condition:boolean|object, [message:string], [callback:function])
+checkState(condition:*, [message:string], [callback:function])
     throws IllegalStateError
 ```
 
