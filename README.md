@@ -1,7 +1,7 @@
 conditional
 ==================
 
-[![Build Status](https://travis-ci.org/anshulverma/conditional.svg?branch=master)](https://travis-ci.org/anshulverma/conditional)
+[![Build Status](http://goo.gl/syDtQQ)](https://travis-ci.org/anshulverma/conditional)
 [![Dependency Status](https://gemnasium.com/anshulverma/conditional.svg)](https://gemnasium.com/anshulverma/conditional)
 [![Coverage Status](https://img.shields.io/coveralls/anshulverma/conditional.svg)](https://coveralls.io/r/anshulverma/conditional?branch=master)
 [![NPM version](https://badge.fury.io/js/conditional.svg)](http://badge.fury.io/js/conditional)
