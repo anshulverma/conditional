@@ -20,3 +20,7 @@ describe 'test defined precondition', ->
   it 'null is a defined value', ->
     wrapper = -> checkDefined null, 'expecting null'
     assert.doesNotThrow wrapper
+
+  it 'test for undefined keyword', ->
+    wrapper = -> checkDefined undefined, 'should fail'
+    assert.throws wrapper, 'should fail'
