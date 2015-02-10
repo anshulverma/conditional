@@ -1,6 +1,6 @@
 {
   "name": "preconditions",
-  "main": "dist/conditional.js",
+  "main": "dist/preconditions.js",
   "version": "5.1.1",
   "homepage": "https://github.com/anshulverma/conditional",
   "authors": [
