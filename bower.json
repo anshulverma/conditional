@@ -1,0 +1,30 @@
+{
+  "name": "preconditions",
+  "main": "dist/conditional.js",
+  "version": "5.1.1",
+  "homepage": "https://github.com/anshulverma/conditional",
+  "authors": [
+    "Anshul Verma <anshul.verma86@gmail.com>"
+  ],
+  "description": "A precondition module to assert your assumptions",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "keywords": [
+    "preconditions"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "visionmedia-debug": "~2.1.1"
+  }
+}
