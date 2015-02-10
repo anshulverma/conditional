@@ -1,8 +1,9 @@
 # Sourcemap
 *.map
 
-# Node library modules
+# Library modules
 node_modules/
+bower_components/
 
 # Build artifacts
 lib/
