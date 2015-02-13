@@ -3,6 +3,7 @@
 
 # Library files
 -node_modules/
+-bower_components/
 
 # Temporary files
 -*~

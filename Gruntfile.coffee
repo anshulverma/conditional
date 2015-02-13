@@ -17,20 +17,38 @@ module.exports = (grunt) ->
     coffee:
       src:
         cwd: '<%= path.src %>'
-        src: ['*.coffee']
-        dest: '<%= path.build %>'
+        src: [ '*.coffee' ]
+        dest: '<%= path.build %>/src'
+        ext: '.js'
+        expand: true
+        flatten: true
+      testSrc:
+        cwd: '<%= path.test %>'
+        src: [ '*.coffee' ]
+        dest: '<%= path.build %>/test'
+        ext: '.js'
+        expand: true
+        flatten: true
+      testHelpers:
+        cwd: '<%= path.test %>/helpers'
+        src: [ '*.coffee' ]
+        dest: '<%= path.build %>/test/helpers'
         ext: '.js'
         expand: true
         flatten: true
     browserify:
+      options:
+        banner: '// CommonJS export for browser - please do not edit directly'
+        external: [ 'debug', 'ms' ]
+        browserifyOptions:
+          standalone: 'preconditions'
+          transform: 'browserify-shim'
       src:
-        src: [ '<%= path.build %>/main.js' ]
+        src: [ '<%= path.build %>/src/main.js' ]
         dest: 'dist/preconditions.js'
-        options:
-          banner: '// please do not edit directly'
-          external: [ 'debug' ]
-          browserifyOptions:
-            standalone: 'conditional'
+      test:
+        src: [ '<%= path.build %>/test/*.js' ]
+        dest: 'dist/preconditions_test.js'
     watch:
       coffee:
         files: ['<%= path.src %>/*.coffee', '<%= path.test %>/*.coffee']
@@ -42,8 +60,7 @@ module.exports = (grunt) ->
         require:
           [
             'coffee-script/register',
-            'coffee-script',
-            '<%= path.test %>/test_helper.coffee'
+            'coffee-script'
           ]
       test:
         options:
@@ -99,7 +116,6 @@ module.exports = (grunt) ->
       coverage: '<%= path.coverage %>'
       docs: 'docs'
       build: '<%= path.build %>'
-      browserified: 'dist'
     path:
       src: 'src'
       test: 'test'
@@ -147,7 +163,7 @@ module.exports = (grunt) ->
       'clean',
       'coffeelint',
       'test',
-      'coffee:src',
+      'coffee',
       'browserify',
       'docs'
     ]

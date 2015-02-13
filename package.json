@@ -9,9 +9,31 @@
     "Anshul Verma <anshul.verma86@gmail.com>"
   ],
   "scripts": {
-    "test": "grunt test",
+    "test": "mocha --ui tdd --reporter spec",
     "prepublish": "grunt build"
   },
+  "testling": {
+    "preprocess": "bower install",
+    "harness": "mocha",
+    "files": [
+      "lib/test/*.js"
+    ],
+    "scripts": [
+      "bower_components/visionmedia-debug/dist/debug.js",
+      "dist/preconditions.js"
+    ],
+    "browsers": [
+      "ie/6..latest",
+      "chrome/22..latest",
+      "firefox/16..latest",
+      "safari/4.0..latest",
+      "opera/11.0..latest",
+      "iphone/6.0..latest",
+      "ipad/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  },
+  "browserify-shim": "./.shim.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/anshulverma/conditional"
@@ -20,6 +42,7 @@
     "debug": "^2.0.0"
   },
   "devDependencies": {
+    "browserify-shim": "^3.8.2",
     "chai": "1.9.1",
     "coffee-script": "^1.7.1",
     "grunt-browserify": "^3.3.0",

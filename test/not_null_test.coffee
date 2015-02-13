@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkNull, checkNotNull, IllegalValueError} = preconditions
 
 describe 'not null precondition test', ->

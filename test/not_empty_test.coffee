@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkNotEmpty, IllegalValueError} = preconditions
 
 describe 'test notEmpty precondition', ->

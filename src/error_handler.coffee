@@ -3,6 +3,8 @@ unwanted = []
 
 # override stack to hide certain frames
 overrideStack = ->
+  return if window? # not hiding stack trace in the browser
+
   # remove unwanted frames from stack trace
   prepareStackTrace = Error.prepareStackTrace
   Error.prepareStackTrace = (err, stack) ->

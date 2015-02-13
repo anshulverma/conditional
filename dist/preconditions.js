@@ -1,5 +1,5 @@
-// please do not edit directly
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.conditional=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// CommonJS export for browser - please do not edit directly
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.preconditions=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function() {
   var overrideStack, unwanted,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -8,6 +8,9 @@
 
   overrideStack = function() {
     var prepareStackTrace;
+    if (typeof window !== "undefined" && window !== null) {
+      return;
+    }
     prepareStackTrace = Error.prepareStackTrace;
     return Error.prepareStackTrace = function(err, stack) {
       var _ref;
@@ -31,7 +34,7 @@
 }).call(this);
 
 },{}],2:[function(require,module,exports){
-(function (__filename){
+(function (global,__filename){
 (function() {
   var AbstractError, ArgumentChecker, Checker, ContainsChecker, DEFAULT_CALLBACK, DEFAULT_MESSAGES, DefinedChecker, EmptyChecker, EqualsChecker, IllegalArgumentError, IllegalStateError, IllegalValueError, InvalidTypeError, NullChecker, NumberTypeChecker, StateChecker, UndefinedValueError, UnknownValueError, argumentChecker, debug, isArray, isEmptyString, isEqual, isNotArray, isNotPrimitive, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, trimStackTrace, xor, _ref,
     __hasProp = {}.hasOwnProperty,
@@ -40,7 +43,7 @@
 
   _ref = require('./util'), isObject = _ref.isObject, isArray = _ref.isArray, isNotArray = _ref.isNotArray, isNumeric = _ref.isNumeric, isString = _ref.isString, isEmptyString = _ref.isEmptyString, isNotUndefined = _ref.isNotUndefined, isUndefined = _ref.isUndefined, isEqual = _ref.isEqual, isNotPrimitive = _ref.isNotPrimitive, isPrimitive = _ref.isPrimitive, xor = _ref.xor;
 
-  debug = require('debug')('conditional');
+  debug = (typeof window !== "undefined" ? window.debug : typeof global !== "undefined" ? global.debug : null)('conditional');
 
   DEFAULT_CALLBACK = function(err) {
     if (err != null) {
@@ -430,8 +433,8 @@
 
 }).call(this);
 
-}).call(this,"/lib/main.js")
-},{"./error_handler":1,"./util":3,"debug":"debug"}],3:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},"/lib/src/main.js")
+},{"./error_handler":1,"./util":3}],3:[function(require,module,exports){
 (function (__filename){
 (function() {
   var isArray, isBoolean, isEmptyString, isEqual, isNotArray, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, negate, toString, trimStackTrace, xor;
@@ -541,6 +544,6 @@
 
 }).call(this);
 
-}).call(this,"/lib/util.js")
+}).call(this,"/lib/src/util.js")
 },{"./error_handler":1}]},{},[2])(2)
 });
