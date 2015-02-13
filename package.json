@@ -13,7 +13,7 @@
     "prepublish": "grunt build"
   },
   "testling": {
-    "preprocess": "bower install"
+    "preprocess": "bower install",
     "harness": "mocha",
     "files": [
       "lib/test/*.js"
