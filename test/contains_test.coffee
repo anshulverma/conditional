@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkContains, UnknownValueError, IllegalArgumentError} = preconditions
 
 describe 'test contains precondition', ->

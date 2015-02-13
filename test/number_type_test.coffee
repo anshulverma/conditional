@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkNumberType, InvalidTypeError} = preconditions
 
 describe 'test number type precondition', ->

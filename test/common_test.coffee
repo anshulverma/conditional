@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {
   checkArgument
   checkNumberType
@@ -144,7 +146,8 @@ runTests = (test) ->
     test executor
 
 describe 'common tests for preconditions', ->
-  describe 'error trace should not contain unwanted frames', ->
+  stackFrameSuite = if window? then describe.skip else describe
+  stackFrameSuite 'error trace should not contain unwanted frames', ->
     runTests (executor) ->
       it "#{executor.name} check", ->
         try

@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {
   checkArgument, IllegalArgumentError
   checkState   , IllegalStateError

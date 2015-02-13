@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkEquals, UnknownValueError, IllegalArgumentError} = preconditions
 
 UNDEFINED = {}.xyz

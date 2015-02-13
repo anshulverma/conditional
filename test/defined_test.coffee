@@ -1,3 +1,5 @@
+require './helpers/test_helper'
+
 {checkDefined} = preconditions
 
 describe 'test defined precondition', ->
