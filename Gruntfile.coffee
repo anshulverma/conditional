@@ -49,6 +49,16 @@ module.exports = (grunt) ->
       test:
         src: [ '<%= path.build %>/test/*.js' ]
         dest: 'dist/preconditions_test.js'
+    uglify:
+      options:
+        banner: """
+                // Preconditions --- https://github.com/anshulverma/conditional
+                // License MIT
+                // Copyright 2014 Anshul Verma
+
+                """
+      minify:
+        files: 'dist/preconditions.min.js': ['dist/preconditions.js']
     watch:
       coffee:
         files: ['<%= path.src %>/*.coffee', '<%= path.test %>/*.coffee']
@@ -133,6 +143,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-sed'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-browserify'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   buildType = grunt.option('type') || 'local'
   checkContains buildType, ['local', 'ci'], "invalid build type '#{buildType}'"
@@ -165,5 +176,6 @@ module.exports = (grunt) ->
       'test',
       'coffee',
       'browserify',
+      'uglify',
       'docs'
     ]
