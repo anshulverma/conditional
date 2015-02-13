@@ -1,4 +1,5 @@
 {checkContains} = require './src/main'
+pkg = require './package.json'
 
 module.exports = (grunt) ->
   grunt.initConfig
@@ -52,7 +53,8 @@ module.exports = (grunt) ->
     uglify:
       options:
         banner: """
-                // Preconditions --- https://github.com/anshulverma/conditional
+                // Preconditions (version #{pkg.version})
+                // https://github.com/anshulverma/conditional
                 // License MIT
                 // Copyright 2014 Anshul Verma
 
