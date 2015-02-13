@@ -14,6 +14,8 @@ conditional
 - [conditional](#conditional)
     - [Summary](#summary)
     - [Installation](#installation)
+        - [NPM](#npm)
+        - [Bower](#bower)
     - [Usage](#usage)
         - [Argument check](#argument-check)
         - [State check](#state-check)
@@ -76,8 +78,16 @@ findMax([]);  // throws "IllegalArgumentError: array is empty"
 
 ## Installation
 
+### NPM
+
 ``` bash
 $ npm install conditional
+```
+
+### Bower
+
+``` bash
+$ bower install preconditions
 ```
 
 ## Usage
