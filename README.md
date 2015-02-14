@@ -16,6 +16,7 @@ conditional
     - [Installation](#installation)
         - [NPM](#npm)
         - [Bower](#bower)
+    - [Browser version](#browser-version)
     - [Usage](#usage)
         - [Argument check](#argument-check)
         - [State check](#state-check)
@@ -89,6 +90,14 @@ $ npm install conditional
 ``` bash
 $ bower install preconditions
 ```
+
+## Browser version
+
+This library can be used in the browser. You can either copy the file
+you need from `dist` folder, or, you can get it from cdnjs called
+`preconditions`. This will export a global variable called
+`preconditions` which will work exactly as defined in following usage
+examples.
 
 ## Usage
 
