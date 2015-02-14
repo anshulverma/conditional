@@ -40,8 +40,11 @@ conditional
 
 This is a preconditions package for node modules based on Google's
 Preconditions library. We all make certain assumptions when writing
-code. These can be of the form of method arguments. Consider a method
-called `findMax`:
+code. Won't it be nice to assert that your assumptions about data is
+correct? And to gracefully fail with a meaningful error message in case
+the data is bad or assumption was not valid in the first place?
+
+Consider a method called `findMax`:
 
 ``` js
 function findMax(arr) {
