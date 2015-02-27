@@ -17,3 +17,6 @@
 
 # Documentation
 -docs/
+
+# SCM
+-.git/

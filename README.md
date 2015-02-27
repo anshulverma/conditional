@@ -90,6 +90,9 @@ $ npm install conditional
 
 ### Bower
 
+This will install the bower component without the `debug`
+dependency. You must to add this yourself if it is needed in your app.
+
 ``` bash
 $ bower install preconditions
 ```
@@ -433,6 +436,15 @@ only if linting succeeds.
 
 The `default` task of `grunt` will run this command as well. So, just
 typing `grunt` and pressing RET is also sufficient to run tests.
+
+## Debugging
+
+The debug module is integrated into this library. To enable it, run your
+app like this:
+
+``` bash
+$ DEBUG=conditional npm start
+```
 
 ## Documentation
 

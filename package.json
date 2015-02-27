@@ -19,8 +19,7 @@
       "lib/test/*.js"
     ],
     "scripts": [
-      "bower_components/visionmedia-debug/dist/debug.js",
-      "dist/preconditions.min.js"
+      "dist/preconditions.js"
     ],
     "browsers": [
       "ie/6..latest",
