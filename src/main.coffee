@@ -11,7 +11,7 @@
   isPrimitive
   xor
 } = require './util'
-debug = require('debug') 'conditional'
+debug = require('./debug_wrapper')
 
 # throw error in a checker by default
 DEFAULT_CALLBACK = (err) ->

@@ -1,7 +1,7 @@
 {
   "name": "preconditions",
   "main": "dist/preconditions.js",
-  "version": "5.2.2",
+  "version": "5.2.3",
   "homepage": "https://github.com/anshulverma/conditional",
   "authors": [
     "Anshul Verma <anshul.verma86@gmail.com>"
@@ -23,8 +23,5 @@
     "node_modules",
     "bower_components",
     "test"
-  ],
-  "dependencies": {
-    "visionmedia-debug": "~2.1.1"
-  }
+  ]
 }

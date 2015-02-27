@@ -1,3 +1,3 @@
 module.exports = {
-  'debug' : { 'exports' : 'global:debug' }
+  // export global libs here
 }
