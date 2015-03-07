@@ -8,6 +8,8 @@ conditional
 
 [![NPM](https://nodei.co/npm/conditional.png?stars=true&downloads=true)](https://nodei.co/npm/conditional/)
 
+![NPM Downloads](https://nodei.co/npm-dl/conditional.png?months=1)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
