@@ -146,19 +146,6 @@ runTests = (test) ->
     test executor
 
 describe 'common tests for preconditions', ->
-  stackFrameSuite = if window? then describe.skip else describe
-  stackFrameSuite 'error trace should not contain unwanted frames', ->
-    runTests (executor) ->
-      it "#{executor.name} check", ->
-        try
-          executor.execFail FORCED_ERROR
-          assert.fail "precondition #{executor.name} check should fail"
-        catch e
-          assert.equal e.message, FORCED_ERROR,
-            "error message should be '#{FORCED_ERROR}'"
-          assert.notMatch e.stack, /(main|util)\.(coffee|js)/,
-            'stack trace should not contain unwanted frames'
-
   describe 'error message can be controlled by precondition call', ->
     runTests (executor) ->
       it "#{executor.name} check", ->

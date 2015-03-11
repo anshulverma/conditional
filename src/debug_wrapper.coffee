@@ -1,8 +1,9 @@
 try
-  debug = require('debug') 'conditional'
+  debug = require('debug')
 catch e
   debug =
-    (message) ->
-      console.log("#{name} :: #{message}");
+    (name) ->
+      (message) ->
+        console.log "#{name} :: #{message}"
 
-module.exports = debug
+module.exports = debug 'conditional'
