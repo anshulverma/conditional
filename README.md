@@ -8,6 +8,8 @@ conditional
 
 [![NPM](https://nodei.co/npm/conditional.png?stars=true&downloads=true)](https://nodei.co/npm/conditional/)
 
+![NPM Downloads](https://nodei.co/npm-dl/conditional.png?months=1)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
@@ -16,6 +18,7 @@ conditional
     - [Installation](#installation)
         - [NPM](#npm)
         - [Bower](#bower)
+    - [Browser version](#browser-version)
     - [Usage](#usage)
         - [Argument check](#argument-check)
         - [State check](#state-check)
@@ -39,8 +42,11 @@ conditional
 
 This is a preconditions package for node modules based on Google's
 Preconditions library. We all make certain assumptions when writing
-code. These can be of the form of method arguments. Consider a method
-called `findMax`:
+code. Won't it be nice to assert that your assumptions about data is
+correct? And to gracefully fail with a meaningful error message in case
+the data is bad or assumption was not valid in the first place?
+
+Consider a method called `findMax`:
 
 ``` js
 function findMax(arr) {
@@ -92,6 +98,14 @@ dependency. You must to add this yourself if it is needed in your app.
 ``` bash
 $ bower install preconditions
 ```
+
+## Browser version
+
+This library can be used in the browser. You can either copy the file
+you need from `dist` folder, or, you can get it from cdnjs called
+`preconditions`. This will export a global variable called
+`preconditions` which will work exactly as defined in following usage
+examples.
 
 ## Usage
 

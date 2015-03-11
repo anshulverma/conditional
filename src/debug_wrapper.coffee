@@ -3,6 +3,6 @@ try
 catch e
   debug =
     (message) ->
-      console.log("#{name} :: #{message}");
+      console.log "#{name} :: #{message}"
 
 module.exports = debug
