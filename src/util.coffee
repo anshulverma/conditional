@@ -48,10 +48,6 @@ isEqual = (actual, expected) ->
 isPrimitive = (value) ->
   isNumeric(value) or isBoolean(value)
 
-# hide this file from the stack trace
-{trimStackTrace} = require './error_handler'
-trimStackTrace __filename
-
 xor = (operand1, operand2) ->
   !operand1 != !operand2
 

@@ -170,10 +170,6 @@ class IllegalValueError extends AbstractError
 
 class IllegalStateError extends AbstractError
 
-# hide this file from the stack trace
-{trimStackTrace} = require './error_handler'
-trimStackTrace __filename
-
 # export all preconditions
 argumentChecker = new ArgumentChecker 'checkArgument'
 

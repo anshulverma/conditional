@@ -111,9 +111,6 @@ examples.
 
 The usage of various checks differs slightly as explained.
 
-One important thing to note for all types of checks is that the error
-stack trace do not include frames that point to methods of this module.
-
 Each check accepts a callback function as the last parameter. If passed,
 and if the check fails, the callback will be invoked with the
 error. This means that message and callback parameters are optional for

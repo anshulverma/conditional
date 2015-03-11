@@ -4,56 +4,23 @@
   var debug, e;
 
   try {
-    debug = require('debug')('conditional');
+    debug = require('debug');
   } catch (_error) {
     e = _error;
-    debug = function(message) {
-      return console.log("" + name + " :: " + message);
+    debug = function(name) {
+      return function(message) {
+        return console.log("" + name + " :: " + message);
+      };
     };
   }
 
-  module.exports = debug;
+  module.exports = debug('conditional');
 
 }).call(this);
 
 },{"debug":"debug"}],2:[function(require,module,exports){
 (function() {
-  var overrideStack, unwanted,
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-  unwanted = [];
-
-  overrideStack = function() {
-    var prepareStackTrace;
-    if (typeof window !== "undefined" && window !== null) {
-      return;
-    }
-    prepareStackTrace = Error.prepareStackTrace;
-    return Error.prepareStackTrace = function(err, stack) {
-      var _ref;
-      while (_ref = stack[0].getFileName(), __indexOf.call(unwanted, _ref) >= 0) {
-        stack.splice(0, 1);
-      }
-      return prepareStackTrace(err, stack);
-    };
-  };
-
-  overrideStack();
-
-  module.exports.trimStackTrace = function(file) {
-    return unwanted.push(file);
-  };
-
-  module.exports.overrideStack = function() {
-    return overrideStack();
-  };
-
-}).call(this);
-
-},{}],3:[function(require,module,exports){
-(function (__filename){
-(function() {
-  var AbstractError, ArgumentChecker, Checker, ContainsChecker, DEFAULT_CALLBACK, DEFAULT_MESSAGES, DefinedChecker, EmptyChecker, EqualsChecker, IllegalArgumentError, IllegalStateError, IllegalValueError, InvalidTypeError, NullChecker, NumberTypeChecker, StateChecker, UndefinedValueError, UnknownValueError, argumentChecker, debug, isArray, isEmptyString, isEqual, isNotArray, isNotPrimitive, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, trimStackTrace, xor, _ref,
+  var AbstractError, ArgumentChecker, Checker, ContainsChecker, DEFAULT_CALLBACK, DEFAULT_MESSAGES, DefinedChecker, EmptyChecker, EqualsChecker, IllegalArgumentError, IllegalStateError, IllegalValueError, InvalidTypeError, NullChecker, NumberTypeChecker, StateChecker, UndefinedValueError, UnknownValueError, argumentChecker, debug, isArray, isEmptyString, isEqual, isNotArray, isNotPrimitive, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, xor, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -390,10 +357,6 @@
 
   })(AbstractError);
 
-  trimStackTrace = require('./error_handler').trimStackTrace;
-
-  trimStackTrace(__filename);
-
   argumentChecker = new ArgumentChecker('checkArgument');
 
   new NumberTypeChecker('checkNumberType');
@@ -450,11 +413,9 @@
 
 }).call(this);
 
-}).call(this,"/lib/src/main.js")
-},{"./debug_wrapper":1,"./error_handler":2,"./util":4}],4:[function(require,module,exports){
-(function (__filename){
+},{"./debug_wrapper":1,"./util":3}],3:[function(require,module,exports){
 (function() {
-  var isArray, isBoolean, isEmptyString, isEqual, isNotArray, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, negate, toString, trimStackTrace, xor;
+  var isArray, isBoolean, isEmptyString, isEqual, isNotArray, isNotUndefined, isNumeric, isObject, isPrimitive, isString, isUndefined, negate, toString, xor;
 
   negate = function(fn) {
     return function(value) {
@@ -525,10 +486,6 @@
     return isNumeric(value) || isBoolean(value);
   };
 
-  trimStackTrace = require('./error_handler').trimStackTrace;
-
-  trimStackTrace(__filename);
-
   xor = function(operand1, operand2) {
     return !operand1 !== !operand2;
   };
@@ -561,6 +518,5 @@
 
 }).call(this);
 
-}).call(this,"/lib/src/util.js")
-},{"./error_handler":2}]},{},[3])(3)
+},{}]},{},[2])(2)
 });

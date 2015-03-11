@@ -5,8 +5,3 @@ srcPath = if coverageMode then '../../coverage/src' else '../../src'
 srcType = if coverageMode then 'js' else 'coffee'
 
 global.preconditions = require "#{srcPath}/main"
-
-# Somehow `Error.prepareStackTrace` gets overridden when running tests using
-# grunt's mocha task. This is why we have to override stackTrace again here.
-{overrideStack} = require "#{srcPath}/error_handler"
-do overrideStack
