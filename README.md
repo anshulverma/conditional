@@ -87,7 +87,7 @@ findMax([]);  // throws "IllegalArgumentError: array is empty"
 ### NPM
 
 ``` bash
-$ npm install conditional
+$ npm install conditional --save
 ```
 
 ### Bower
